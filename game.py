@@ -6,9 +6,9 @@ from actor import *
 class game:
     def __init__(self):
         self.__is_running: bool = True
-        self.__is_updating_actors = False
+        self.__is_updating_actors: bool = False
         self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
-        self.__mScreenSize: (int, int) = (600, 400)
+        self.__mScreenSize: tuple[int, int] = (600, 400)
         self.__actors: list[actor] = []
         self.__pending_actors: list[actor] = []
         self.__sprites: list[sprite_component] = []
