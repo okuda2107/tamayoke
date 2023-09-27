@@ -1,10 +1,8 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
 from abc import abstractmethod
 from enum import Enum
-if TYPE_CHECKING:
-    from game import *
-    from component import *
+from game import *
+from component import *
 
 class state(Enum):
     active = 1

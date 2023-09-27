@@ -2,8 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 import pygame
 from pygame.locals import *
-if TYPE_CHECKING:
-    from actor import *
+from actor import *
 
 class game:
     def __init__(self):
@@ -22,6 +21,7 @@ class game:
         self.__screen = pygame.display.set_mode(size=self.__mScreenSize,flags=pygame.RESIZABLE)
         if self.__screen == None:
             return False
+        self.__load_data()
         return True
     
     def run_loop(self) -> None:
@@ -75,3 +75,6 @@ class game:
             self.__pending_actors.remove(actor)
         if actor in self.__actors:
             self.__actors.remove(actor)
+
+    def __load_data(self) -> None:
+        my_actor = actor(self)
