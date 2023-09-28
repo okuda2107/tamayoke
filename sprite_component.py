@@ -1,5 +1,6 @@
 from __future__ import annotations
 from abc import abstractmethod
+import pygame
 from game import *
 from actor import *
 from component import *
@@ -15,5 +16,5 @@ class sprite_component(component):
         self._owner.game.remove_sprite(self)
 
     @abstractmethod
-    def draw(self) -> None:
+    def draw(self, screen: pygame.Surface) -> None:
         pass

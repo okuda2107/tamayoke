@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 from actor import *
 from sprite_component import *
+from circle_sprite_component import *
 
 class game:
     def __init__(self):
@@ -60,7 +61,7 @@ class game:
     def __generate_output(self) -> None:
         self.__screen.fill((220, 220, 220))
         for sprite in self.__sprites:
-            sprite.draw()
+            sprite.draw(self.__screen)
         pygame.display.update()
 
     def shutdown(self) -> None:
@@ -85,7 +86,7 @@ class game:
             index += 1
             if my_draw_order < sprite.draw_order:
                 break
-            self.__sprites.insert(index, sprite_comp)
+        self.__sprites.insert(index, sprite_comp)
 
     def remove_sprite(self, sprite_comp: sprite_component) -> None:
         if sprite_comp in self.__sprites:
@@ -93,3 +94,4 @@ class game:
 
     def __load_data(self) -> None:
         my_actor = actor(self)
+        csc = circle_sprite_component(my_actor)
