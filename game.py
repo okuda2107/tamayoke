@@ -19,6 +19,7 @@ class game:
         result = pygame.init()
         if result[1] != 0:
             return False
+        pygame.display.set_caption("example")
         self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
         if self.__screen == None:
             return False
