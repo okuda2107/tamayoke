@@ -10,7 +10,7 @@ class game:
         self.__is_running: bool = True
         self.__is_updating_actors: bool = False
         self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
-        self.__mScreenSize: tuple[int, int] = (600, 400)
+        self.screen_size: tuple[int, int] = (600, 400)
         self.__actors: list[actor] = []
         self.__pending_actors: list[actor] = []
         self.__sprites: list[sprite_component] = []
@@ -19,7 +19,7 @@ class game:
         result = pygame.init()
         if result[1] != 0:
             return False
-        self.__screen = pygame.display.set_mode(size=self.__mScreenSize,flags=pygame.RESIZABLE)
+        self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
         if self.__screen == None:
             return False
         self.__load_data()
@@ -94,4 +94,7 @@ class game:
 
     def __load_data(self) -> None:
         my_actor = actor(self)
+        my_actor.position = (0.5, 0.5)
         csc = circle_sprite_component(my_actor)
+        csc.radius = 150
+        csc.color = (0, 100, 200)

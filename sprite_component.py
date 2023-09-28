@@ -18,3 +18,9 @@ class sprite_component(component):
     @abstractmethod
     def draw(self, screen: pygame.Surface) -> None:
         pass
+
+    def _calc_disp_position(self) -> tuple[int, int]:
+        return (
+            int(self._owner.position[0] * self._owner.game.screen_size[0]), 
+            int(self._owner.position[1] * self._owner.game.screen_size[1])
+        )
