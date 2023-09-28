@@ -4,8 +4,12 @@ from actor import *
 
 class component:
     def __init__(self, actor: actor, update_order: int = 100):
-        self.__owner = actor
+        self._owner = actor
         self.update_order: int = update_order
+        self._owner.add_component(self)
+
+    def __del__(self):
+        self._owner.remove_component(self)
 
     @abstractmethod
     def update(self, delta_time: float) -> None:

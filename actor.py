@@ -10,16 +10,16 @@ class state(Enum):
 
 class actor:
     def __init__(self, game: game):
-        self.__game = game
+        self.game = game
         self.position: tuple[float, float] = (0.0, 0.0)
         self.scale: float = 0.0
         self.rotation: float = 0.0
         self.state: state = state.active
         self.__components: list[component] = []
-        self.__game.add_actor(self)
+        self.game.add_actor(self)
 
     def __del__(self):
-        self.__game.remove_actor(self)
+        self.game.remove_actor(self)
         self.__components.clear()
 
     def update(self, delta_time: float) -> None:
