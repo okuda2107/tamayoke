@@ -60,7 +60,7 @@ class game:
             del actor
 
     def __generate_output(self) -> None:
-        self.__screen.fill((220, 220, 220))
+        self.__screen.fill((0, 100, 200))
         for sprite in self.__sprites:
             sprite.draw(self.__screen)
         pygame.display.update()
@@ -95,7 +95,7 @@ class game:
 
     def __load_data(self) -> None:
         my_actor = actor(self)
-        my_actor.position = (0.5, 0.5)
+        my_actor.position = (0.3, 0.5)
         csc = circle_sprite_component(my_actor)
         csc.radius = 150
-        csc.color = (0, 100, 200)
+        csc.color = (200, 0, 100)
