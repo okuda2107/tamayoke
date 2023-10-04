@@ -13,7 +13,7 @@ class game:
         self.screen_size: tuple[int, int] = (600, 400)
         self.__actors: list[actor] = []
         self.__pending_actors: list[actor] = []
-        self.__sprites: list[sprite_component] = []
+        self.__sprites = pygame.sprite.Group()
 
     def initialize(self) -> bool:
         result = pygame.init()
@@ -61,8 +61,7 @@ class game:
 
     def __generate_output(self) -> None:
         self.__screen.fill((0, 100, 200))
-        for sprite in self.__sprites:
-            sprite.draw(self.__screen)
+        self.__sprites.draw(self.__screen)
         pygame.display.update()
 
     def shutdown(self) -> None:
@@ -82,16 +81,10 @@ class game:
 
     def add_sprite(self, sprite_comp: sprite_component) -> None:
         my_draw_order: int = sprite_comp.draw_order
-        index = -1
-        for sprite in self.__sprites:
-            index += 1
-            if my_draw_order < sprite.draw_order:
-                break
-        self.__sprites.insert(index, sprite_comp)
+        self.__sprites.add(sprite_comp.sprite)
 
     def remove_sprite(self, sprite_comp: sprite_component) -> None:
-        if sprite_comp in self.__sprites:
-            self.__sprites.remove(sprite_comp)
+        self.__sprites.remove(sprite_comp.sprite)
 
     def __load_data(self) -> None:
         my_actor = actor(self)
