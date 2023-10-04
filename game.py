@@ -89,6 +89,5 @@ class game:
     def __load_data(self) -> None:
         my_actor = actor(self)
         my_actor.position = (0.3, 0.5)
-        csc = circle_sprite_component(my_actor)
-        csc.radius = 150
-        csc.color = (200, 0, 100)
+        sc = sprite_component(my_actor)
+        sc.set_image("asset/test.png")

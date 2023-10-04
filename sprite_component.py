@@ -21,7 +21,7 @@ class sprite_component(component):
 
     @abstractmethod
     def draw(self, screen: pygame.Surface) -> None:
-        position = self._calc_disp_position
+        position = self._calc_disp_position()
         self.sprite.rect = Rect(
             position[0],
             position[1], 
@@ -31,11 +31,11 @@ class sprite_component(component):
         self.sprite.image = pygame.transform.rotate(self.sprite.image, self._owner.rotation)
         screen.blit(self.sprite.image, self.sprite.rect)
 
-    def set_image(self, file_name) -> None:
+    def set_image(self, file_name: str) -> None:
         self.sprite.image = pygame.image.load(file_name).convert_alpha()
         self.width = self.sprite.image.get_width()
         self.height = self.sprite.image.get_height()
-        position = self._calc_disp_position
+        position = self._calc_disp_position()
         self.sprite.rect = Rect(
             position[0],
             position[1], 
