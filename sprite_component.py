@@ -31,8 +31,9 @@ class sprite_component(component):
         self.sprite.image = pygame.transform.rotate(self.sprite.image, self._owner.rotation)
         screen.blit(self.sprite.image, self.sprite.rect)
 
-    def set_image(self, file_name: str) -> None:
+    def set_image(self, file_name: str, size: tuple[int, int]) -> None:
         self.sprite.image = pygame.image.load(file_name).convert_alpha()
+        self.sprite.image = pygame.transform.scale(self.sprite.image, size)
         self.width = self.sprite.image.get_width()
         self.height = self.sprite.image.get_height()
         position = self._calc_disp_position()
@@ -45,6 +46,6 @@ class sprite_component(component):
 
     def _calc_disp_position(self) -> tuple[int, int]:
         return (
-            int(self._owner.position[0] * self._owner.game.screen_size[0]), 
-            int(self._owner.position[1] * self._owner.game.screen_size[1])
+            int((self._owner.position[0] * self._owner.game.screen_size[0]) - (self.width / 2)), 
+            int((self._owner.position[1] * self._owner.game.screen_size[1]) - (self.height / 2))
         )

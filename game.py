@@ -88,6 +88,6 @@ class game:
 
     def __load_data(self) -> None:
         my_actor = actor(self)
-        my_actor.position = (0.3, 0.5)
+        my_actor.position = (0.5, 0.5)
         sc = sprite_component(my_actor)
-        sc.set_image("asset/test.png")
+        sc.set_image("asset/test.png", (300, 300))
