@@ -45,7 +45,7 @@ class game:
         self.__is_updating_actors = False
 
     def __update_game(self) -> None:
-        delta_time: float = self.__ticks_counts.tick(60) / 1000
+        delta_time: float = self.__ticks_counts.tick_busy_loop(500) / 1000
         print(delta_time)
         if delta_time > 0.05:
             delta_time = 0.05
