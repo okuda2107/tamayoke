@@ -43,10 +43,8 @@ class game:
 
     def __update_game(self) -> None:
         delta_time: float = self.__ticks_counts.tick(16) / 1000.0
-        print(delta_time)
         if delta_time > 0.05:
             delta_time = 0.05
-        print(delta_time)
         self.__is_updating_actors = True
         for actor in self.__actors:
             actor.update(delta_time)
