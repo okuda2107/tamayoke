@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 from actor import *
 from sprite_component import *
-from circle_sprite_component import *
+from move_component import *
 
 class game:
     def __init__(self):
@@ -13,7 +13,7 @@ class game:
         self.screen_size: tuple[int, int] = (600, 400)
         self.__actors: list[actor] = []
         self.__pending_actors: list[actor] = []
-        self.__sprites = pygame.sprite.Group()
+        self.__sprites: list[sprite_component] = []
 
     def initialize(self) -> bool:
         result = pygame.init()
@@ -43,8 +43,10 @@ class game:
 
     def __update_game(self) -> None:
         delta_time: float = self.__ticks_counts.tick(16) / 1000.0
+        print(delta_time)
         if delta_time > 0.05:
             delta_time = 0.05
+        print(delta_time)
         self.__is_updating_actors = True
         for actor in self.__actors:
             actor.update(delta_time)
@@ -61,7 +63,8 @@ class game:
 
     def __generate_output(self) -> None:
         self.__screen.fill((0, 100, 200))
-        self.__sprites.draw(self.__screen)
+        for sprite in self.__sprites:
+            sprite.draw(self.__screen)
         pygame.display.update()
 
     def shutdown(self) -> None:
@@ -81,13 +84,21 @@ class game:
 
     def add_sprite(self, sprite_comp: sprite_component) -> None:
         my_draw_order: int = sprite_comp.draw_order
-        self.__sprites.add(sprite_comp.sprite)
+        index = -1
+        for sprite in self.__sprites:
+            index += 1
+            if my_draw_order < sprite.draw_order:
+                break
+        self.__sprites.insert(index, sprite_comp)
 
     def remove_sprite(self, sprite_comp: sprite_component) -> None:
-        self.__sprites.remove(sprite_comp.sprite)
+        if sprite_comp in self.__sprites:
+            self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
         my_actor = actor(self)
-        my_actor.position = (0.5, 0.5)
+        my_actor.position = (0, 0.5)
         sc = sprite_component(my_actor)
         sc.set_image("asset/test.png", (300, 300))
+        mc = move_component(my_actor)
+        mc.velocity = (0.3, 0)

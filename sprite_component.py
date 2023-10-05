@@ -22,10 +22,10 @@ class sprite_component(component):
     @abstractmethod
     def draw(self, screen: pygame.Surface) -> None:
         position = self._calc_disp_position()
-        self.sprite.rect = Rect(
+        self.sprite.rect = pygame.Rect(
             position[0],
-            position[1], 
-            self.width, 
+            position[1],
+            self.width,
             self.height
         )
         self.sprite.image = pygame.transform.rotate(self.sprite.image, self._owner.rotation)
@@ -37,10 +37,10 @@ class sprite_component(component):
         self.width = self.sprite.image.get_width()
         self.height = self.sprite.image.get_height()
         position = self._calc_disp_position()
-        self.sprite.rect = Rect(
+        self.sprite.rect = pygame.Rect(
             position[0],
-            position[1], 
-            self.width, 
+            position[1],
+            self.width,
             self.height
         )
 
