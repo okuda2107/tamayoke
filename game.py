@@ -1,15 +1,18 @@
 from __future__ import annotations
 import pygame
 from pygame.locals import *
+from physics import *
 from actor import *
 from sprite_component import *
-from move_component import *
+from gravity_component import *
 
 class game:
     def __init__(self):
         self.__is_running: bool = True
         self.__is_updating_actors: bool = False
         self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
+        self.physics = physics()
+        #self.audio_system
         self.screen_size: tuple[int, int] = (600, 400)
         self.__actors: list[actor] = []
         self.__pending_actors: list[actor] = []
@@ -42,7 +45,8 @@ class game:
         self.__is_updating_actors = False
 
     def __update_game(self) -> None:
-        delta_time: float = self.__ticks_counts.tick(16) / 1000.0
+        delta_time: float = self.__ticks_counts.tick(60) / 1000
+        print(delta_time)
         if delta_time > 0.05:
             delta_time = 0.05
         self.__is_updating_actors = True
@@ -95,8 +99,7 @@ class game:
 
     def __load_data(self) -> None:
         my_actor = actor(self)
-        my_actor.position = (0, 0.5)
+        my_actor.position = (0.5, 0)
         sc = sprite_component(my_actor)
-        sc.set_image("asset/test.png", (300, 300))
-        mc = move_component(my_actor)
-        mc.velocity = (0.3, 0)
+        sc.set_image("asset/test.png", (50, 50))
+        gc = gravity_component(my_actor)
