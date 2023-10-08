@@ -7,6 +7,9 @@ class move_component(component):
     def __init__(self, owner: actor):
         super().__init__(owner)
         self._velocity: tuple[float, float] = (0.0, 0.0)
+    
+    def __del__(self):
+        super().__del__()
 
     def update(self, delta_time: float):
         position = self._owner.position
