@@ -2,11 +2,11 @@ from __future__ import annotations
 import pygame
 from pygame.locals import *
 from physics import *
-from input_camera import *
+from mediapipe_input import *
 from actor import *
 from sprite_component import *
 from gravity_component import *
-from bar_input_component import *
+from bar import *
 
 class game:
     def __init__(self):
@@ -14,7 +14,7 @@ class game:
         self.__is_updating_actors: bool = False
         self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
         self.physics = physics()
-        self.input_camera = input_camera()
+        self.mediapipe = mediapipe_input()
         #self.audio_system
         self.screen_size: tuple[int, int] = (600, 400)
         self.__actors: list[actor] = []
@@ -29,7 +29,7 @@ class game:
         self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
         if self.__screen == None:
             return False
-        if not self.input_camera.initialize():
+        if not self.mediapipe.initialize():
             return False
         self.__load_data()
         return True
@@ -109,4 +109,4 @@ class game:
         sc = sprite_component(my_actor)
         sc.set_image("asset/test.png", (50, 50))
         gc = gravity_component(my_actor)
-        bic = bar_input_component(my_actor)
+        my_bar = bar(self)
