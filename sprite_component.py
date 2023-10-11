@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import abstractmethod
 import pygame
+import math
 from game import *
 from actor import *
 from component import *
@@ -11,6 +12,7 @@ class sprite_component(component):
         super().__init__(owner)
         self.draw_order = draw_order
         self.sprite = pygame.sprite.Sprite()
+        self._owner.sprite = self.sprite
         self.width: int = 0
         self.height: int = 0
         self._owner.game.add_sprite(self)
@@ -28,7 +30,7 @@ class sprite_component(component):
             self.width,
             self.height
         )
-        self.sprite.image = pygame.transform.rotate(self.sprite.image, self._owner.rotation)
+        self.sprite.image = pygame.transform.rotate(self.sprite.image, math.degrees(math.atan2(self._owner.rotation)))
         screen.blit(self.sprite.image, self.sprite.rect)
 
     def set_image(self, file_name: str, size: tuple[int, int]) -> None:
@@ -44,7 +46,7 @@ class sprite_component(component):
             self.height
         )
 
-    def _calc_disp_position(self) -> tuple[int, int]:
+    def _calc_disp_position(self):
         return (
             int((self._owner.position[0] * self._owner.game.screen_size[0]) - (self.width / 2)), 
             int((self._owner.position[1] * self._owner.game.screen_size[1]) - (self.height / 2))

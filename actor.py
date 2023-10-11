@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import abstractmethod
 from enum import Enum
+import numpy as np
 from game import *
 from component import *
 
@@ -11,11 +12,13 @@ class state(Enum):
 class actor:
     def __init__(self, game: game):
         self.game = game
-        self.position: tuple[float, float] = (0.0, 0.0)
+        self.position = np.array([0.0, 0.0])
+        self.velocity = np.array([0.0, 0.0])
         self.scale: float = 0.0
-        self.rotation: float = 0.0
+        self.rotation: float = 0.0 # 傾き
         self.state: state = state.active
         self.__components: list[component] = []
+        self.sprite = pygame.sprite.Sprite()
         self.game.add_actor(self)
 
     def __del__(self):

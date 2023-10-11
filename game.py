@@ -105,6 +105,7 @@ class game:
 
     def __load_data(self) -> None:
         my_actor = actor(self)
+        self.my_bar = bar(self)
         my_actor.position = (0.5, 0)
         sc = sprite_component(my_actor)
         sc.set_image("asset/test.png", (50, 50))

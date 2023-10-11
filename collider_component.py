@@ -1,17 +1,18 @@
 # 作りかけ
 from __future__ import annotations
 import pygame
-import numpy as np
 from actor import *
 from component import *
 
-class gravity_component(component):
+class collider_component(component):
     def __init__(self, owner: actor):
         super().__init__(owner)
-        self.__gravity: float = 1.5
-
+        self._owner.game.physics.add_collider(self._owner.sprite)
+    
     def __del__(self):
         super().__del__()
+        self._owner.game.physics.remove_collider(self._owner.sprite)
 
     def process_input(self, delta_time: float):
-        self._owner.velocity = np.array([self._owner.velocity[0], self._owner.velocity[1] + self.__gravity * delta_time])
+        contact_actors = self._owner.game.physics.isCollisiton(self._owner.sprite)
+        
