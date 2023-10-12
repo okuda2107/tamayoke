@@ -5,6 +5,7 @@ from actor import *
 class bar(actor):
     def __init__(self, game: game):
         super().__init__(game)
+        self.length: float = 0.0
 
     def __del__(self):
         super().__del__()
