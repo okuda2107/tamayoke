@@ -1,11 +1,16 @@
 from __future__ import annotations
+import numpy as np
 from game import *
 from actor import *
+from sprite_component import *
 
 class bar(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         self.length: float = 0.0
+        self.position = np.array([0.5, 0.5])
+        sc = SpriteComponent(self)
+        sc.set_image("asset/temp.png", (500, 500))
 
     def __del__(self):
         super().__del__()
@@ -13,4 +18,4 @@ class bar(Actor):
     def actor_input(self) -> None:
         result = self.game.mediapipe.detect_pose()
         if result != None:
-            self.rotation = ((result.pose_landmarks.landmark[16].y - result.pose_landmarks.landmark[15].y) * self.game.screen_size[1]) / ((result.pose_landmarks.landmark[16].x - result.pose_landmarks.landmark[15].x) * self.game.screen_size[0])
+            self.rotation = ((result.pose_landmarks.landmark[16].y - result.pose_landmarks.landmark[15].y) * self.game.screen_size[1]) / ((result.pose_landmarks.landmark[15].x - result.pose_landmarks.landmark[16].x) * self.game.screen_size[0])

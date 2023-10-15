@@ -1,6 +1,7 @@
 from __future__ import annotations
 import pygame
 from pygame.locals import *
+import numpy as np
 from physics import *
 from mediapipe_input import *
 from actor import *
@@ -16,7 +17,7 @@ class Game:
         self.physics = Physics()
         self.mediapipe = MediapipeInput()
         #self.audio_system
-        self.screen_size: tuple[int, int] = (600, 400)
+        self.screen_size = np.array([600, 400])
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []
@@ -53,8 +54,7 @@ class Game:
         self.__is_updating_actors = False
 
     def __update_game(self) -> None:
-        delta_time: float = self.__ticks_counts.tick_busy_loop(120) / 1000
-        print(delta_time)
+        delta_time: float = self.__ticks_counts.tick_busy_loop(25) / 1000
         if delta_time > 0.05:
             delta_time = 0.05
         self.__is_updating_actors = True
@@ -107,9 +107,13 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        my_actor = Actor(self)
-        # self.my_bar = bar(self)
-        my_actor.position = (0.5, 0)
-        sc = SpriteComponent(my_actor)
-        sc.set_image("asset/test.png", (50, 50))
-        gc = GravityComponent(my_actor)
+        self.my_bar = bar(self)
+        # my_actor = Actor(self)
+        # my_actor.position = np.array([0.5, 0.5])
+        # my_actor.rotation = 1.0
+        # sc = SpriteComponent(my_actor)
+        # sc.set_image("asset/kao.jpg", (300, 300))
+        # my_actor2 = Actor(self)
+        # my_actor2.position = np.array([0.5, 0.5])
+        # sc = SpriteComponent(my_actor2)
+        # sc.set_image("asset/kao.jpg", (300, 300))
