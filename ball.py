@@ -1,10 +1,10 @@
 from __future__ import annotations
 import math
 import numpy as np
-from Game import *
-from Actor import *
-from GravityComponent import *
-from MoveComponent import *
+from game import *
+from actor import *
+from gravity_component import *
+from move_component import *
 
 
 class ball(Actor):

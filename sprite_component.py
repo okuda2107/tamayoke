@@ -2,9 +2,9 @@ from __future__ import annotations
 from abc import abstractmethod
 import pygame
 import math
-from Game import *
-from Actor import *
-from Component import *
+from game import *
+from actor import *
+from component import *
 
 #衝突判定も含めます
 class SpriteComponent(Component):

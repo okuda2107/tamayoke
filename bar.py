@@ -1,6 +1,6 @@
 from __future__ import annotations
-from Game import *
-from Actor import *
+from game import *
+from actor import *
 
 class bar(Actor):
     def __init__(self, game: Game):

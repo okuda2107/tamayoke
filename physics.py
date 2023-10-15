@@ -5,7 +5,7 @@
 # collider_component
 from __future__ import annotations
 import pygame
-from Actor import *
+from actor import *
 
 class Physics:
     def __init__(self):

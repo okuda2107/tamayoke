@@ -1,8 +1,8 @@
 from __future__ import annotations
-from Game import *
+from game import *
 #作りかけ
-from Actor import *
-from Component import *
+from actor import *
+from component import *
 
 class MoveComponent(Component):
     def __init__(self, owner: Actor):

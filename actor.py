@@ -3,8 +3,8 @@ from abc import abstractmethod
 from enum import Enum
 import numpy as np
 import pygame
-from Game import *
-from Component import *
+from game import *
+from component import *
 
 class state(Enum):
     active = 1

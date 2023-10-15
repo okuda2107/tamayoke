@@ -2,8 +2,8 @@
 from __future__ import annotations
 import pygame
 import numpy as np
-from Actor import *
-from MoveComponent import *
+from actor import *
+from move_component import *
 
 class GravityComponent(MoveComponent):
     def __init__(self, owner: Actor):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from abc import abstractmethod
-from Actor import *
+from actor import *
 
 class Component:
     def __init__(self, actor: Actor, update_order: int = 100):

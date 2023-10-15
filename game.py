@@ -1,11 +1,11 @@
 from __future__ import annotations
 import pygame
 from pygame.locals import *
-from Physics import *
-from MediapipeInput import *
-from Actor import *
-from SpriteComponent import *
-from GravityComponent import *
+from physics import *
+from mediapipe_input import *
+from actor import *
+from sprite_component import *
+from gravity_component import *
 from bar import *
 
 class Game:

@@ -1,8 +1,8 @@
 # 作りかけ
 from __future__ import annotations
 import pygame
-from Actor import *
-from Component import *
+from actor import *
+from component import *
 
 class ColliderComponent(Component):
     def __init__(self, owner: Actor):
