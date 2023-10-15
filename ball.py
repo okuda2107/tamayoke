@@ -1,13 +1,18 @@
 from __future__ import annotations
 import math
 import numpy as np
-from game import *
-from actor import *
+from Game import *
+from Actor import *
+from GravityComponent import *
+from MoveComponent import *
 
-class ball(actor):
-    def __init__(self, game: game, radius: float):
+
+class ball(Actor):
+    def __init__(self, game: Game, radius: float):
         super().__init__(game)
         self.radius: float = radius
+        gc = GravityComponent(self)
+        mc = MoveComponent(self)
 
     def __del__(self):
         super().__del__()

@@ -1,9 +1,9 @@
 from __future__ import annotations
-from game import *
-from actor import *
+from Game import *
+from Actor import *
 
-class bar(actor):
-    def __init__(self, game: game):
+class bar(Actor):
+    def __init__(self, game: Game):
         super().__init__(game)
         self.length: float = 0.0
 

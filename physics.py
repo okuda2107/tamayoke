@@ -5,9 +5,9 @@
 # collider_component
 from __future__ import annotations
 import pygame
-from actor import *
+from Actor import *
 
-class physics:
+class Physics:
     def __init__(self):
         self.colliders = pygame.sprite.Group()
 

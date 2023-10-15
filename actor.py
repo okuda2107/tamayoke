@@ -2,22 +2,23 @@ from __future__ import annotations
 from abc import abstractmethod
 from enum import Enum
 import numpy as np
-from game import *
-from component import *
+import pygame
+from Game import *
+from Component import *
 
 class state(Enum):
     active = 1
     dead = 2
 
-class actor:
-    def __init__(self, game: game):
+class Actor:
+    def __init__(self, game: Game):
         self.game = game
         self.position = np.array([0.0, 0.0])
         self.velocity = np.array([0.0, 0.0])
         self.scale: float = 0.0
         self.rotation: float = 0.0 # 傾き
         self.state: state = state.active
-        self.__components: list[component] = []
+        self.__components: list[Component] = []
         self.sprite = pygame.sprite.Sprite()
         self.game.add_actor(self)
 
@@ -48,7 +49,7 @@ class actor:
     def actor_input(self) -> None:
         pass
 
-    def add_component(self, component: component) -> None:
+    def add_component(self, component: Component) -> None:
         my_order: int = component.update_order
         index = -1
         for comp in self.__components:
@@ -57,6 +58,6 @@ class actor:
                 break
         self.__components.insert(index, component)
 
-    def remove_component(self, component: component) -> None:
+    def remove_component(self, component: Component) -> None:
         if component in self.__components:
             self.__components.remove(component)

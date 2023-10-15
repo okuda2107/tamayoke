@@ -3,7 +3,7 @@ import cv2
 
 CAMERA_NUMBER = 0
 
-class mediapipe_input:
+class MediapipeInput:
     def __init__(self):
         self.mp_pose = mp.solutions.pose
 

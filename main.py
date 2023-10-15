@@ -1,7 +1,7 @@
-from game import *
+from Game import *
 
 def main():
-    my_game = game()
+    my_game = Game()
     success: bool = my_game.initialize()
     if success:
         my_game.run_loop()

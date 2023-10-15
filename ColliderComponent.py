@@ -1,11 +1,11 @@
 # 作りかけ
 from __future__ import annotations
 import pygame
-from actor import *
-from component import *
+from Actor import *
+from Component import *
 
-class collider_component(component):
-    def __init__(self, owner: actor):
+class ColliderComponent(Component):
+    def __init__(self, owner: Actor):
         super().__init__(owner)
         self._owner.game.physics.add_collider(self._owner.sprite)
     

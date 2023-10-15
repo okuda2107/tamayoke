@@ -1,35 +1,38 @@
 from __future__ import annotations
 import pygame
 from pygame.locals import *
-from physics import *
-from mediapipe_input import *
-from actor import *
-from sprite_component import *
-from gravity_component import *
+from Physics import *
+from MediapipeInput import *
+from Actor import *
+from SpriteComponent import *
+from GravityComponent import *
 from bar import *
 
-class game:
+class Game:
     def __init__(self):
         self.__is_running: bool = True
         self.__is_updating_actors: bool = False
         self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
-        self.physics = physics()
-        self.mediapipe = mediapipe_input()
+        self.physics = Physics()
+        self.mediapipe = MediapipeInput()
         #self.audio_system
         self.screen_size: tuple[int, int] = (600, 400)
-        self.__actors: list[actor] = []
-        self.__pending_actors: list[actor] = []
-        self.__sprites: list[sprite_component] = []
+        self.__actors: list[Actor] = []
+        self.__pending_actors: list[Actor] = []
+        self.__sprites: list[SpriteComponent] = []
 
     def initialize(self) -> bool:
         result = pygame.init()
         if result[1] != 0:
+            print(pygame.get_error())
             return False
         pygame.display.set_caption("example")
         self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
         if self.__screen == None:
+            print(pygame.get_error())
             return False
         if not self.mediapipe.initialize():
+            print(pygame.get_error())
             return False
         self.__load_data()
         return True
@@ -50,7 +53,7 @@ class game:
         self.__is_updating_actors = False
 
     def __update_game(self) -> None:
-        delta_time: float = self.__ticks_counts.tick_busy_loop(500) / 1000
+        delta_time: float = self.__ticks_counts.tick_busy_loop(120) / 1000
         print(delta_time)
         if delta_time > 0.05:
             delta_time = 0.05
@@ -61,7 +64,7 @@ class game:
         for pending in self.__pending_actors:
             self.__actors.append(pending)
         self.__pending_actors.clear()
-        dead_actors: list[actor] = []
+        dead_actors: list[Actor] = []
         for actor in self.__actors:
             if actor.state == state.dead:
                 dead_actors.append(actor)
@@ -78,19 +81,19 @@ class game:
         self.input_camera.shutdown()
         pygame.quit()
 
-    def add_actor(self, actor: actor) -> None:
+    def add_actor(self, actor: Actor) -> None:
         if self.__is_updating_actors:
             self.__pending_actors.append(actor)
         else:
             self.__actors.append(actor)
 
-    def remove_actor(self, actor: actor) -> None:
+    def remove_actor(self, actor: Actor) -> None:
         if actor in self.__pending_actors:
             self.__pending_actors.remove(actor)
         if actor in self.__actors:
             self.__actors.remove(actor)
 
-    def add_sprite(self, sprite_comp: sprite_component) -> None:
+    def add_sprite(self, sprite_comp: SpriteComponent) -> None:
         my_draw_order: int = sprite_comp.draw_order
         index = -1
         for sprite in self.__sprites:
@@ -99,15 +102,14 @@ class game:
                 break
         self.__sprites.insert(index, sprite_comp)
 
-    def remove_sprite(self, sprite_comp: sprite_component) -> None:
+    def remove_sprite(self, sprite_comp: SpriteComponent) -> None:
         if sprite_comp in self.__sprites:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        my_actor = actor(self)
-        self.my_bar = bar(self)
+        my_actor = Actor(self)
+        # self.my_bar = bar(self)
         my_actor.position = (0.5, 0)
-        sc = sprite_component(my_actor)
+        sc = SpriteComponent(my_actor)
         sc.set_image("asset/test.png", (50, 50))
-        gc = gravity_component(my_actor)
-        my_bar = bar(self)
+        gc = GravityComponent(my_actor)
