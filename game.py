@@ -8,6 +8,7 @@ from actor import *
 from sprite_component import *
 from gravity_component import *
 from bar import *
+from ball import *
 
 class Game:
     def __init__(self):
@@ -108,6 +109,8 @@ class Game:
 
     def __load_data(self) -> None:
         self.my_bar = bar(self)
+        my_ball = ball(self, 0.1)
+        my_ball.position = np.array([0.6, 0])
         # my_actor = Actor(self)
         # my_actor.position = np.array([0.5, 0.5])
         # my_actor.rotation = 1.0

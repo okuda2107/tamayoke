@@ -7,10 +7,10 @@ from sprite_component import *
 class bar(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
-        self.length: float = 0.0
+        self.length: float = 0.8
         self.position = np.array([0.5, 0.5])
         sc = SpriteComponent(self)
-        sc.set_image("asset/temp.png", (500, 500))
+        sc.set_image("asset/temp.png", (0.8 * self.game.screen_size[0], 10))
 
     def __del__(self):
         super().__del__()
