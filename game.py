@@ -4,11 +4,11 @@ from pygame.locals import *
 import numpy as np
 from physics import *
 from mediapipe_input import *
+from audio_system import *
 from actor import *
-from sprite_component import *
-from gravity_component import *
 from bar import *
-from ball import *
+
+from text_component import *
 
 class Game:
     def __init__(self):
@@ -17,7 +17,7 @@ class Game:
         self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
         self.physics = Physics()
         self.mediapipe = MediapipeInput()
-        #self.audio_system
+        self.audio_system = AudioSystem()
         self.screen_size = np.array([600, 400])
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
@@ -108,15 +108,8 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        self.my_bar = bar(self)
-        my_ball = ball(self, 0.1)
-        my_ball.position = np.array([0.6, 0])
-        # my_actor = Actor(self)
-        # my_actor.position = np.array([0.5, 0.5])
-        # my_actor.rotation = 1.0
-        # sc = SpriteComponent(my_actor)
-        # sc.set_image("asset/kao.jpg", (300, 300))
-        # my_actor2 = Actor(self)
-        # my_actor2.position = np.array([0.5, 0.5])
-        # sc = SpriteComponent(my_actor2)
-        # sc.set_image("asset/kao.jpg", (300, 300))
+        # self.my_bar = bar(self)
+        my_actor = Actor(self)
+        my_actor.position = np.array([0.5, 0.5])
+        tc = TextComponent(my_actor, 'microsoftsansserif', 50)
+        tc.set_text('adfadsfdfs', (0,0,0))
