@@ -24,7 +24,8 @@ class Actor:
 
     def __del__(self):
         self.game.remove_actor(self)
-        self.__components.clear()
+        for comp in self.__components:
+            comp.__del__()
 
     def update(self, delta_time: float) -> None:
         if self.state == state.active:

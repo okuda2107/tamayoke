@@ -18,3 +18,6 @@ class title(Actor):
         actor1.title = self
         actor1.pointer1 = actor2
         actor1.pointer2 = actor3
+
+    def __del__(self):
+        return super().__del__()

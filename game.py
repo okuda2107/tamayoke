@@ -71,7 +71,8 @@ class Game:
             if actor.state == state.dead:
                 dead_actors.append(actor)
         for actor in dead_actors:
-            del actor
+            actor.__del__()
+        dead_actors.clear()
 
     def __generate_output(self) -> None:
         self.__screen.fill((43, 45, 49))

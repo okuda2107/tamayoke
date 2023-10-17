@@ -12,22 +12,20 @@ class ball(Actor):
     def __init__(self, game: Game, radius: float):
         super().__init__(game)
         self.radius: float = radius # 縦方向の長さ
+        self.red_white = 0 # red=1, white=2
         gc = GravityComponent(self)
-        sc = SpriteComponent(self)
-        temp_radius = self.radius * self.game.screen_size[0]
-        sc.set_image('asset/test.png', (temp_radius, temp_radius))
 
     def __del__(self):
         super().__del__()
 
 # 仮
     def actor_input(self) -> None:
-        contact_actors = self.game.physics.isCollision(self.sprite)
-        for actor in contact_actors:
-            actor_pos = np.array([actor.center.x / self.game.screen_size[0], actor.center.y / self.game.screen_size[1]])
-            normal /= np.linalg.norm(self.position - actor_pos)
-            normal_vel = np.dot(normal, self.velocity)
-            self.velocity -= 1.5 * normal_vel * normal
+        # contact_actors = self.game.physics.isCollision(self.sprite)
+        # for actor in contact_actors:
+        #     actor_pos = np.array([actor.center.x / self.game.screen_size[0], actor.center.y / self.game.screen_size[1]])
+        #     normal /= np.linalg.norm(self.position - actor_pos)
+        #     normal_vel = np.dot(normal, self.velocity)
+        #     self.velocity -= 1.5 * normal_vel * normal
         
         # 球が線の横にあたっているか
         line_vec = np.array([math.cos(math.atan(self.game.my_bar.rotation)), -1 * math.sin(math.atan(self.game.my_bar.rotation))])

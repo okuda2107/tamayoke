@@ -14,6 +14,9 @@ class pointer(Actor):
         temp_radius = self.radius * self.game.screen_size[0]
         sc.set_image("asset/test.png", (temp_radius, temp_radius))
 
+    def __del__(self):
+        return super().__del__()
+
     def actor_input(self) -> None:
         pose = self.game.mediapipe.detect_pose()
         if pose != None:
