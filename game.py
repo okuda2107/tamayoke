@@ -6,7 +6,6 @@ from physics import *
 from mediapipe_input import *
 from audio_system import *
 from actor import *
-from bar import *
 from title import *
 
 from text_component import *
@@ -110,5 +109,4 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        # self.my_bar = bar(self)
         my_actor = title(self)

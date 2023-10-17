@@ -5,6 +5,7 @@ from actor import *
 from sprite_component import *
 from text_component import *
 from ball_generator import *
+from result import *
 
 point_rate = 100
 # 発生確率
@@ -16,8 +17,7 @@ class point_manager(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         self.position = np.array([0, 0])
-        self.point = 0
-        self.time: float = 60.0
+        self.time: float = 10.0
         self.score: int = 0
         self.tc = TextComponent(self, 'microsoftsansserif', 30)
         self.tc.set_text('', (255, 255, 255))
@@ -60,8 +60,11 @@ class point_manager(Actor):
             self.ball_generator.probability = lebel3
 
         if self.time <= 0:
-            print('summon')
+            actor1 = result(self.game, str(self.score), 150)
+            actor1.position = np.array([0.4, 0.3])
+            self.state = state.dead
+            self.game.my_bar.state = state.dead
+            self.ball_generator.state = state.dead
 
-
-        self.tc.set_text('time:' + str(round(self.time, 2)) + ' score:' + str(self.score), (255, 255, 255))
+        self.tc.set_text('time:' + str(round(self.time, 1)) + ' score:' + str(self.score), (255, 255, 255))
         

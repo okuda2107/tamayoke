@@ -34,8 +34,8 @@ class ball(Actor):
         # 線分の時端より遠くに球が無いか
         edge_plus = self.game.my_bar.position + line_vec * self.game.my_bar.length / 2
         edge_minus = self.game.my_bar.position + line_vec * self.game.my_bar.length / 2 * -1
-        dot_plus = np.dot(edge_plus, self.position)
-        dot_minus = np.dot(edge_minus, self.position)
+        dot_plus = np.dot(-1 * line_vec * self.game.my_bar.length / 2, self.position - edge_plus)
+        dot_minus = np.dot(line_vec * self.game.my_bar.length / 2, self.position - edge_minus)
 
         # 球が遠くにあるけど端と接触しているか
         dist_pos_to_edge_plus = np.sum((edge_plus - self.position) ** 2)
