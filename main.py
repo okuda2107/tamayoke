@@ -1,3 +1,4 @@
+import traceback
 from game import *
 
 def main():
@@ -8,4 +9,7 @@ def main():
     
     my_game.shutdown()
 
-main()
+try:
+    main()
+except Exception as e:
+    print(traceback.format_exc())

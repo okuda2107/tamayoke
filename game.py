@@ -7,6 +7,7 @@ from mediapipe_input import *
 from audio_system import *
 from actor import *
 from bar import *
+from title import *
 
 from text_component import *
 
@@ -73,13 +74,13 @@ class Game:
             del actor
 
     def __generate_output(self) -> None:
-        self.__screen.fill((0, 100, 200))
+        self.__screen.fill((43, 45, 49))
         for sprite in self.__sprites:
             sprite.draw(self.__screen)
         pygame.display.update()
 
     def shutdown(self) -> None:
-        self.input_camera.shutdown()
+        self.mediapipe.shutdown()
         pygame.quit()
 
     def add_actor(self, actor: Actor) -> None:
@@ -109,7 +110,4 @@ class Game:
 
     def __load_data(self) -> None:
         # self.my_bar = bar(self)
-        my_actor = Actor(self)
-        my_actor.position = np.array([0.5, 0.5])
-        tc = TextComponent(my_actor, 'microsoftsansserif', 50)
-        tc.set_text('adfadsfdfs', (0,0,0))
+        my_actor = title(self)
