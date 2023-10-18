@@ -36,10 +36,10 @@ class ball_generator(Actor):
             file = ''
             if random.random() < 0.5:
                 actor.red_white = 1
-                file = 'asset/test.png'
+                file = 'asset/red.png'
             else:
                 actor.red_white = 2
-                file = 'asset/test.png'
+                file = 'asset/white.png'
             sc = SpriteComponent(actor)
             temp_radius = actor.radius * self.game.screen_size[0]
             sc.set_image(file, (temp_radius, temp_radius))

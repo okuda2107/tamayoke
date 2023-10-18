@@ -12,7 +12,7 @@ from point_manager import *
 class entrypoint(Actor):
     def __init__(self, game: Game, radius: float):
         super().__init__(game)
-        self.position = np.array([0.5, 0.6])
+        self.position = np.array([0.5, 0.7])
         self.radius = radius
         self.pointer1: pointer
         self.pointer2: pointer
@@ -21,7 +21,7 @@ class entrypoint(Actor):
         self.counter = 1
         sc = SpriteComponent(self)
         temp_radius = self.radius * self.game.screen_size[0]
-        sc.set_image("asset/test.png", (temp_radius, temp_radius))
+        sc.set_image("asset/entrypoint.png", (temp_radius, temp_radius))
 
     def __del__(self):
         return super().__del__()

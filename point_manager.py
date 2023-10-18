@@ -17,10 +17,10 @@ class point_manager(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         self.position = np.array([0, 0])
-        self.time: float = 10.0
+        self.time: float = 60.0
         self.score: int = 0
         self.tc = TextComponent(self, 'microsoftsansserif', 30)
-        self.tc.set_text('', (255, 255, 255))
+        self.tc.set_text('', (239, 241, 250))
         self.ball_list = []
         self.ball_generator: ball_generator
 
@@ -66,5 +66,5 @@ class point_manager(Actor):
             self.game.my_bar.state = state.dead
             self.ball_generator.state = state.dead
 
-        self.tc.set_text('time:' + str(round(self.time, 1)) + ' score:' + str(self.score), (255, 255, 255))
+        self.tc.set_text('time:' + str(round(self.time, 1)) + ' score:' + str(self.score), (239, 241, 250))
         

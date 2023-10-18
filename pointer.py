@@ -12,7 +12,7 @@ class pointer(Actor):
         self.index = index
         sc = SpriteComponent(self)
         temp_radius = self.radius * self.game.screen_size[0]
-        sc.set_image("asset/test.png", (temp_radius, temp_radius))
+        sc.set_image("asset/pointer.png", (temp_radius, temp_radius))
 
     def __del__(self):
         return super().__del__()

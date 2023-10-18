@@ -10,10 +10,10 @@ class result(Actor):
         self.position = np.array([0, 0])
         self.time = 0
         tc = TextComponent(self, 'microsoftsansserif', size)
-        tc.set_text(s, (255, 255, 255))
+        tc.set_text(s, (239, 241, 250))
         self.sub_text = Actor(self.game)
         tc = TextComponent(self.sub_text, 'microsoftsansserif', 30)
-        tc.set_text('Your Score is', (255, 255, 255))
+        tc.set_text('Your Score is', (239, 241, 250))
         self.sub_text.position = np.array([0.3, 0.1])
 
     def update_actor(self, delta_time: float) -> None:
