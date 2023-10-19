@@ -18,7 +18,7 @@ class Game:
         self.physics = Physics()
         self.mediapipe = MediapipeInput()
         self.audio_system = AudioSystem()
-        self.screen_size = np.array([600, 400])
+        self.screen_size = np.array([1300, 700]) # (1300, 700)
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []
@@ -28,7 +28,7 @@ class Game:
         if result[1] != 0:
             print(pygame.get_error())
             return False
-        pygame.display.set_caption("example")
+        pygame.display.set_caption("tama|wake")
         self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
         if self.__screen == None:
             print(pygame.get_error())

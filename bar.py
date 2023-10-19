@@ -8,7 +8,7 @@ class bar(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         self.length: float = 0.8
-        self.position = np.array([0.5, 0.5])
+        self.position = np.array([0.5, 0.65])
         sc = SpriteComponent(self)
         sc.set_image("asset/bar.png", (0.8 * self.game.screen_size[0], 0.04 * self.game.screen_size[0]))
 
