@@ -23,6 +23,9 @@ class point_manager(Actor):
         self.tc.set_text('', (239, 241, 250))
         self.ball_list = []
         self.ball_generator: ball_generator
+        self.game.audio_system.set_sound('asset/error.wav')
+        self.game.audio_system.set_sound('asset/pop.wav')
+        self.game.audio_system.bgm('asset/get.mp3')
 
     def __del__(self):
         return super().__del__()
@@ -36,19 +39,23 @@ class point_manager(Actor):
                     self.score += int(point_rate * self.ball_generator.probability)
                     ball.state = state.dead
                     dead_ball.append(ball)
+                    self.game.audio_system.play('asset/pop.wav')
                 else:
                     self.score -= int(point_rate * self.ball_generator.probability)
                     ball.state = state.dead
                     dead_ball.append(ball)
+                    self.game.audio_system.play('asset/error.wav')
             if ball.position[0] > 0.5 and ball.position[1] > 1.0:
                 if ball.red_white == 2:
                     self.score += int(point_rate * self.ball_generator.probability)
                     ball.state = state.dead
                     dead_ball.append(ball)
+                    self.game.audio_system.play('asset/pop.wav')
                 else:
                     self.score -= int(point_rate * self.ball_generator.probability)
                     ball.state = state.dead
                     dead_ball.append(ball)
+                    self.game.audio_system.play('asset/error.wav')
         for ball in dead_ball:
             self.ball_list.remove(ball)
 

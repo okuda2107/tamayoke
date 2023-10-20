@@ -18,7 +18,7 @@ class Game:
         self.physics = Physics()
         self.mediapipe = MediapipeInput()
         self.audio_system = AudioSystem()
-        self.screen_size = np.array([1300, 700]) # (1300, 700)
+        self.screen_size = np.array([1000, 700]) # (1300, 700)
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []

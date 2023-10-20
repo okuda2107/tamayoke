@@ -11,13 +11,14 @@ class title(Actor):
         super().__init__(game)
         self.position = np.array([0.5, 0.3])
         sc = SpriteComponent(self)
-        sc.set_image('asset/title.png', tuple(self.game.screen_size * np.array([0.5, 0.6])))
+        sc.set_image('asset/title.png', tuple(self.game.screen_size * np.array([0.6, 0.6])))
         actor1 = entrypoint(self.game, 0.1)
         actor2 = pointer(self.game, 15, 0.01)
         actor3 = pointer(self.game, 16, 0.01)
         actor1.title = self
         actor1.pointer1 = actor2
         actor1.pointer2 = actor3
+        self.game.audio_system.bgm('asset/Cosmic_Fantasy.mp3')
 
     def __del__(self):
         return super().__del__()
