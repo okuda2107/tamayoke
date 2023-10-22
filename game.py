@@ -4,6 +4,7 @@ from pygame.locals import *
 import numpy as np
 from physics import *
 from mediapipe_input import *
+import level_loader
 from audio_system import *
 from actor import *
 from title import *
@@ -109,4 +110,4 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        my_actor = title(self)
+        level_loader.load_level(self, 'asset/title.json')
