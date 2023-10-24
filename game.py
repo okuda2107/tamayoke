@@ -20,6 +20,7 @@ class Game:
         self.mediapipe = MediapipeInput()
         self.audio_system = AudioSystem()
         self.screen_size = np.array([1300, 700]) # (1300, 700)
+        self.camera_check_mode: bool = False
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []
@@ -28,6 +29,9 @@ class Game:
         result = pygame.init()
         if result[1] != 0:
             print(pygame.get_error())
+            return False
+        level_loader.load_game_properties(self, 'asset/GameProperty.json')
+        if self.camera_check_mode:
             return False
         pygame.display.set_caption("tama|wake")
         self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)

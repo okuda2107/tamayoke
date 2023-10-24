@@ -34,6 +34,22 @@ def load_level(game: Game, file_name: str) -> bool:
 def load_global_properties(game: Game, obj: dict[str, Any]) -> None:
     pass
 
+def load_game_properties(game: Game, file_name: str) -> bool:
+    with open(file_name, 'r') as file_data:
+        doc: dict[str, Any] = json.load(file_data)
+    version: int = doc['version']
+    if version != LEVEL_VERSION:
+        print('レベルファイルのバージョンが違います')
+        return False
+    data = doc.get('properties')
+    if data != None:
+        screen_size_data = data.get('screenSize')
+        if screen_size_data != None:
+            game.screen_size = np.array(screen_size_data)
+        check_flag = data.get('cameraCheck')
+        if check_flag != None:
+            game.camera_check_mode = check_flag
+
 def load_actors(game: Game, arr: list[dict[str, Any]]) -> None:
     for obj in arr:
         type_name: str = obj['type']
