@@ -72,6 +72,15 @@ class Actor:
     def actor_input(self) -> None:
         pass
 
+    # TypeIDを引数に取り，IDに合致したcomponentを既に持っていたらそれを返す．無かったらNoneを返す．
+    def get_component_of_type(self, type: TypeID) -> None|Component:
+        comp: Component = None
+        for c in self.__components:
+            if c.get_type() == type:
+                comp = c
+                break
+        return comp
+
     def add_component(self, component: Component) -> None:
         my_order: int = component.update_order
         index = -1
