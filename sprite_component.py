@@ -1,5 +1,7 @@
 from __future__ import annotations
 from abc import abstractmethod
+from typing import Any, TypeVar
+import numpy as np
 import pygame
 import math
 from game import *
@@ -20,6 +22,21 @@ class SpriteComponent(Component):
     def __del__(self):
         super().__del__()
         self._owner.game.remove_sprite(self)
+
+    def get_type(self):
+        return TypeID.t_sprite_component
+    
+    def load_properties(self, obj: dict[str, Any]) -> None:
+        super().load_properties(obj)
+        sprite_data = obj.get('sprite')
+        if sprite_data != None:
+            file_name = sprite_data.get('fileName')
+            size = sprite_data.get('size')
+            if file_name != None and size != None:
+                self.set_image(file_name, tuple(self._owner.game.screen_size * np.array(size)))
+        draw_order_data = obj.get('drawOrder')
+        if draw_order_data != None:
+            self.draw_order = draw_order_data
 
     @abstractmethod
     def draw(self, screen: pygame.Surface) -> None:

@@ -1,10 +1,18 @@
 from __future__ import annotations
 from abc import abstractmethod
+from typing import Any, TypeVar
 from enum import Enum
 import numpy as np
 import pygame
 from game import *
 from component import *
+
+# actorを生成する関数のジェネリクス
+# T = TypeVar('T')
+# def create(game: Game, obj: dict[str, Any], type: T) -> T:
+#     t: T = T(game)
+#     t.load_properties(obj)
+#     return t
 
 class state(Enum):
     active = 1
@@ -26,6 +34,20 @@ class Actor:
         self.game.remove_actor(self)
         for comp in self.__components:
             comp.__del__()
+
+    def load_properties(self, obj: dict[str, Any]) -> None:
+        state_data = obj.get('state')
+        if state_data != None:
+            if state_data == 'active':
+                self.state = state.active
+            elif state_data == 'dead':
+                self.state = state.dead
+        pos_data = obj.get('position')
+        if pos_data != None:
+            self.position = np.array(pos_data)
+        rot_data = obj.get('rotation')
+        if rot_data != None:
+            self.rotation = rot_data
 
     def update(self, delta_time: float) -> None:
         if self.state == state.active:
@@ -49,6 +71,15 @@ class Actor:
     @abstractmethod
     def actor_input(self) -> None:
         pass
+
+    # TypeIDを引数に取り，IDに合致したcomponentを既に持っていたらそれを返す．無かったらNoneを返す．
+    def get_component_of_type(self, type: TypeID) -> None|Component:
+        comp: Component = None
+        for c in self.__components:
+            if c.get_type() == type:
+                comp = c
+                break
+        return comp
 
     def add_component(self, component: Component) -> None:
         my_order: int = component.update_order

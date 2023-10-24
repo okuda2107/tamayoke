@@ -9,9 +9,6 @@ from pointer import *
 class title(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
-        self.position = np.array([0.5, 0.3])
-        sc = SpriteComponent(self)
-        sc.set_image('asset/title.png', tuple(self.game.screen_size * np.array([0.6, 0.6])))
         actor1 = entrypoint(self.game, 0.1)
         actor2 = pointer(self.game, 15, 0.01)
         actor3 = pointer(self.game, 16, 0.01)
