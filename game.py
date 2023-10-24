@@ -32,6 +32,7 @@ class Game:
             return False
         level_loader.load_game_properties(self, 'asset/GameProperty.json')
         if self.camera_check_mode:
+            camera_check()
             return False
         pygame.display.set_caption("tama|wake")
         self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
