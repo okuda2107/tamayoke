@@ -2,7 +2,7 @@
     "version": 1,
     "actors": [
         {
-            "type": "Actor",
+            "type": "title",
             "properties": {
                 "position": [0.5, 0.3]
             },

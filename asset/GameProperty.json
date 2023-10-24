@@ -1,7 +1,7 @@
 {
     "version": 1,
     "properties": {
-        "screenSize": [1700, 300],
+        "screenSize": [1300, 700],
         "cameraCheck": false
     }
 }

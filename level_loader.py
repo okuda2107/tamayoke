@@ -34,6 +34,7 @@ def load_level(game: Game, file_name: str) -> bool:
 def load_global_properties(game: Game, obj: dict[str, Any]) -> None:
     pass
 
+# 特別実装 画面サイズの値を外部からいじるために必要
 def load_game_properties(game: Game, file_name: str) -> bool:
     with open(file_name, 'r') as file_data:
         doc: dict[str, Any] = json.load(file_data)
