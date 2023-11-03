@@ -3,7 +3,9 @@ from typing import Any, TypeVar
 import json
 from game import *
 from actor import *
-from component import *
+from point_manager import *
+from result import *
+
 from title import *
 from sprite_component import *
 

@@ -4,7 +4,8 @@
         {
             "type": "title",
             "properties": {
-                "position": [0.5, 0.3]
+                "position": [0.5, 0.3],
+                "startSize": 0.1
             },
             "components": [
                 {

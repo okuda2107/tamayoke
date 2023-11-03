@@ -1,0 +1,11 @@
+{
+    "version": 1,
+    "actors": [
+        {
+            "type": "point_manager",
+            "properties": {
+                "timerSize": 80
+            }
+        }
+    ]
+}

@@ -7,6 +7,11 @@ from sprite_component import *
 from ball import *
 from point_manager import *
 
+# 発生確率
+level1 = 0.05
+level2 = 0.1
+lebel3 = 0.3
+
 class ball_generator(Actor):
     def __init__(self, game: Game):
         super().__init__(game)

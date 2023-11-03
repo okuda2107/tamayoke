@@ -25,6 +25,8 @@ class Game:
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []
 
+        self.point = 0
+
     def initialize(self) -> bool:
         result = pygame.init()
         if result[1] != 0:

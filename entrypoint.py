@@ -1,5 +1,7 @@
 from __future__ import annotations
+from typing import Any
 import numpy as np
+from component import Any
 from game import *
 from actor import *
 from sprite_component import *
@@ -8,6 +10,7 @@ from pointer import *
 from bar import *
 from ball_generator import *
 from point_manager import *
+import level_loader
 
 class entrypoint(Actor):
     def __init__(self, game: Game, radius: float):
@@ -38,11 +41,7 @@ class entrypoint(Actor):
         self.counter -= delta_time
         self.text = str(self.counter)
         if self.counter < 0:
-            self.game.my_bar = bar(self.game)
-            actor1 = ball_generator(self.game)
-            actor2 = point_manager(self.game)
-            actor1.point_manager = actor2
-            actor2.ball_generator = actor1
+            level_loader.load_level(self.game, 'asset/playground.json')
             self.state = state.dead
             self.title.state = state.dead
             self.pointer1.state = state.dead

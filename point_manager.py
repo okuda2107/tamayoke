@@ -1,11 +1,15 @@
 from __future__ import annotations
+from typing import Any
 import numpy as np
+from component import Any
 from game import *
 from actor import *
 from sprite_component import *
 from text_component import *
 from ball_generator import *
+from bar import *
 from result import *
+import level_loader
 
 point_rate = 100
 # 発生確率
@@ -19,8 +23,6 @@ class point_manager(Actor):
         self.position = np.array([0, 0])
         self.time: float = 60.0
         self.score: int = 0
-        self.tc = TextComponent(self, 'microsoftsansserif', 80)
-        self.tc.set_text('', (239, 241, 250))
         self.ball_list = []
         self.ball_generator: ball_generator
         self.game.audio_system.set_sound('asset/error.wav')
@@ -67,8 +69,8 @@ class point_manager(Actor):
             self.ball_generator.probability = lebel3
 
         if self.time <= 0:
-            actor1 = result(self.game, str(self.score), 150)
-            actor1.position = np.array([0.4, 0.3])
+            level_loader.load_level(self.game, 'asset/result.json')
+            self.game.point = self.score
             self.state = state.dead
             self.game.my_bar.state = state.dead
             self.ball_generator.state = state.dead
@@ -77,3 +79,14 @@ class point_manager(Actor):
 
         self.tc.set_text('time:' + str(round(self.time, 1)) + ' score:' + str(self.score), (239, 241, 250))
         
+    def load_properties(self, obj: dict[str, Any]) -> None:
+        super().load_properties(obj)
+        self.game.my_bar = bar(self.game)
+        actor1 = ball_generator(self.game)
+        text_size = obj.get('timerSize')
+        if text_size == None:
+            text_size = 80
+        self.tc = TextComponent(self, 'microsoftsansserif', text_size)
+        self.tc.set_text('', (239, 241, 250))
+        actor1.point_manager = self
+        self.ball_generator = actor1

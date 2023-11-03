@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "actors": [
+        {
+            "type": "result",
+            "properties": {
+                "position": [0.4, 0.3],
+                "scoreSize": 150,
+                "textSize": 30,
+                "textPos": [0.3, 0.1]
+            }
+        }
+    ]
+}
