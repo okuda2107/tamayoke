@@ -11,11 +11,6 @@ class result(Actor):
         super().__init__(game)
         self.position = np.array([0, 0])
         self.time = 0
-        
-        self.sub_text = Actor(self.game)
-        tc = TextComponent(self.sub_text, 'microsoftsansserif', 30)
-        tc.set_text('Your Score is', (239, 241, 250))
-        self.sub_text.position = np.array([0.3, 0.1])
 
     def update_actor(self, delta_time: float) -> None:
         self.time += delta_time

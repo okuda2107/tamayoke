@@ -69,8 +69,8 @@ class point_manager(Actor):
             self.ball_generator.probability = lebel3
 
         if self.time <= 0:
-            level_loader.load_level(self.game, 'asset/result.json')
             self.game.point = self.score
+            level_loader.load_level(self.game, 'asset/result.json')
             self.state = state.dead
             self.game.my_bar.state = state.dead
             self.ball_generator.state = state.dead
