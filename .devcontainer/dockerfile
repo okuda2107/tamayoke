@@ -1,0 +1,26 @@
+FROM ubuntu:22.04
+
+# create user
+RUN apt-get update \
+    && apt-get install -y sudo \
+    && echo "vscode ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/ALL \
+    && groupadd \
+        --gid 5000 \
+        vscode \
+    && useradd \
+        --uid 5000 \
+        --gid 5000 \
+        --home-dir /home/vscode \
+        --create-home \
+        --shell /bin/bash \
+        vscode
+
+RUN apt-get install -y --no-install-recommends \
+        python3 \
+        python3-pip \
+        python3-tk \
+        libopencv-dev \
+    &&  apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER vscode

@@ -1,0 +1,17 @@
+{
+	"name": "${localWorkspaceFolderBasename}",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "dev",
+	"containerUser": "vscode",
+	"remoteUser": "vscode",
+	"workspaceFolder": "/workspace",
+	"updateRemoteUserUID": true,
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go",
+				"ms-python.python"
+			]
+		}
+	}
+}

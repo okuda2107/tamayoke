@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+    dev:
+        build:
+            context: .
+            dockerfile: dockerfile
+        working_dir: /workspace
+        privileged: true
+        volumes:
+            - type: bind
+              source: ..
+              target: /workspace
+              consistency: cached
+            - type: bind
+              source: .python
+              target: /home/vscode/.local
+              consistency: cached
+        command: /bin/sh -c "while sleep 1000; do :; done" # devcontainerで起動させるために必要
