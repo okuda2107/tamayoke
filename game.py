@@ -117,4 +117,5 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        level_loader.load_level(self, 'asset/title.json')
+        # level_loader.load_level(self, 'asset/title.json')
+        level_loader.load_level(self, 'asset/test.json')
