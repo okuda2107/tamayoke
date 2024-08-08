@@ -1,5 +1,5 @@
 import traceback
-from game import *
+from game import Game
 
 def main():
     my_game = Game()
@@ -8,6 +8,7 @@ def main():
         my_game.run_loop()
     
     my_game.shutdown()
+
 
 try:
     main()

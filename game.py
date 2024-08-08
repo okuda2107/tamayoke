@@ -1,8 +1,7 @@
 from __future__ import annotations
 import pygame
-from pygame.locals import *
 import numpy as np
-from physics import *
+from phys_world import PhysWorld
 from mediapipe_input import *
 import level_loader
 from audio_system import *
@@ -15,8 +14,8 @@ class Game:
     def __init__(self):
         self.__is_running: bool = True
         self.__is_updating_actors: bool = False
-        self.__ticks_counts: pygame.time.Clock = pygame.time.Clock()
-        self.physics = Physics()
+        self.__ticks_counts: pygame.time.Clock
+        self.physics = PhysWorld(self)
         self.mediapipe = MediapipeInput()
         self.audio_system = AudioSystem()
         self.screen_size = np.array([1300, 700]) # (1300, 700)
@@ -37,13 +36,15 @@ class Game:
             camera_check()
             return False
         pygame.display.set_caption("tama|wake")
-        self.__screen = pygame.display.set_mode(size=self.screen_size,flags=pygame.RESIZABLE)
+        self.__screen = pygame.display.set_mode(self.screen_size, pygame.RESIZABLE)
+        self.screen_size = np.array(self.__screen.get_size())
         if self.__screen == None:
             print(pygame.get_error())
             return False
         if not self.mediapipe.initialize():
             print(pygame.get_error())
             return False
+        self.__ticks_counts = pygame.time.Clock()
         self.__load_data()
         return True
     
@@ -55,7 +56,7 @@ class Game:
 
     def __process_input(self) -> None:
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 self.__is_running = False
         self.__is_updating_actors = True
         for actor in self.__actors:

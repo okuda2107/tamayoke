@@ -5,6 +5,7 @@ from game import *
 from actor import *
 from point_manager import *
 from result import *
+from test import Test
 
 from title import *
 from sprite_component import *

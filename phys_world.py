@@ -1,7 +1,10 @@
 from __future__ import annotations
-from game import Game
-from box_component import BoxComponent
-from circle_component import CircleComponent
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from game import Game
+    from box_component import BoxComponent
+    from circle_component import CircleComponent
 
 class PhysWorld:
     game: Game
