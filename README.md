@@ -63,7 +63,7 @@ python 3.9.13
 
 ## 開発環境構築
 1. ソースコードをダウンロード
-1. `python3 -m venv {venv_name}`
+1. `python -m venv {venv_name}`
 1. `source {venv_name}/bin/activate`でvenv起動 windowsの場合は`{venv_name}/Scripts/activate`
 1. `pip install -r requirements.txt`をコマンドで叩く
 1. `deactivate`でvenvから抜ける
