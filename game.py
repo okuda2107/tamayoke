@@ -2,6 +2,7 @@ from __future__ import annotations
 import pygame
 import numpy as np
 from phys_world import PhysWorld
+from physics import Physics
 from mediapipe_input import *
 import level_loader
 from audio_system import *
@@ -55,12 +56,13 @@ class Game:
             self.__generate_output()
 
     def __process_input(self) -> None:
-        for event in pygame.event.get():
+        event_list = pygame.event.get()
+        for event in event_list:
             if event.type == pygame.QUIT:
                 self.__is_running = False
         self.__is_updating_actors = True
         for actor in self.__actors:
-            actor.process_input()
+            actor.process_input(event_list)
         self.__is_updating_actors = False
 
     def __update_game(self) -> None:

@@ -36,5 +36,5 @@ class Component:
 
     #めったに実装しない　カメラからの入力を受ける
     @abstractmethod
-    def process_input(self) -> None:
+    def process_input(self, event) -> None:
         pass

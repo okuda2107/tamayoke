@@ -62,14 +62,14 @@ class Actor:
     def update_actor(self, delta_time: float) -> None:
         pass
 
-    def process_input(self) -> None:
+    def process_input(self, event) -> None:
         if self.state == state.active:
             for comp in self.__components:
-                comp.process_input()
-            self.actor_input()
+                comp.process_input(event)
+            self.actor_input(event)
 
     @abstractmethod
-    def actor_input(self) -> None:
+    def actor_input(self, event) -> None:
         pass
 
     # TypeIDを引数に取り，IDに合致したcomponentを既に持っていたらそれを返す．無かったらNoneを返す．

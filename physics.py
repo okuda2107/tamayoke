@@ -8,7 +8,7 @@ import pygame
 from actor import *
 
 class Physics:
-    def __init__(self):
+    def __init__(self, game):
         self.colliders = pygame.sprite.Group()
 
     def __del__(self):
