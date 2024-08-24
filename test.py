@@ -47,9 +47,9 @@ class Test(Actor):
         for e in event:
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_w:
-                    y_vel += self.speed
-                if e.key == pygame.K_s:
                     y_vel -= self.speed
+                if e.key == pygame.K_s:
+                    y_vel += self.speed
                 if e.key == pygame.K_a:
                     x_vel -= self.speed
                 if e.key == pygame.K_d:
@@ -59,4 +59,4 @@ class Test(Actor):
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
         self.position = self.position + self.velocity * delta_time
-        intersect()
+        # intersect()
