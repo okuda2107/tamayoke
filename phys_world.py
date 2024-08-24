@@ -8,19 +8,19 @@ if TYPE_CHECKING:
 
 class PhysWorld:
     game: Game
-    __boxes: list[BoxComponent]
+    boxes: list[BoxComponent]
     __fires: list[CircleComponent]
     __bombs: list[CircleComponent]
     __pointer: list[CircleComponent]
 
     def __init__(self, game: Game):
         self.game = game
-        self.__boxes: list[BoxComponent] = []
+        self.boxes: list[BoxComponent] = []
         self.__fires: list[CircleComponent] = []
         self.__pointer: list[CircleComponent] = []
 
     def add_box(self, box: BoxComponent):
-        self.__boxes.append(box)
+        self.boxes.append(box)
 
     def remove_box(self, box: BoxComponent):
-        self.__boxes.remove(box)
+        self.boxes.remove(box)
