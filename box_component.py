@@ -2,6 +2,7 @@ from __future__ import annotations
 from component import Component
 from collision import AABB
 from actor import Actor
+import copy
 
 class BoxComponent(Component):
     def __init__(self, owner: Actor):
@@ -15,7 +16,7 @@ class BoxComponent(Component):
         super().__del__()
 
     def update(self, delta_time: float):
-        self.__world_box = self.__object_box
+        self.__world_box = copy.deepcopy(self.__object_box)
         self.__world_box.min_pos *= self._owner.scale
         self.__world_box.max_pos *= self._owner.scale
         self.__world_box.min_pos += self._owner.position
@@ -23,6 +24,7 @@ class BoxComponent(Component):
 
     def set_object_box(self, model: AABB):
         self.__object_box = model
+        self.__world_box = model
 
     def get_world_box(self):
         return self.__world_box

@@ -20,7 +20,7 @@ class Test(Actor):
         sc = SpriteComponent(self)
         sc.set_image('asset/title.png', (200, 200))
         bc = BoxComponent(self)
-        box = AABB(self.position, sc.image_size, self.game.screen_size)
+        box = AABB(sc.image_size, self.game.screen_size)
         bc.set_object_box(box)
 
         # player
@@ -29,7 +29,7 @@ class Test(Actor):
         sc = SpriteComponent(actor)
         sc.set_image('asset/pointer.png', (10, 10))
         bc = BoxComponent(actor)
-        box = AABB(actor.position, sc.image_size, self.game.screen_size)
+        box = AABB(sc.image_size, self.game.screen_size)
         bc.set_object_box(box)
 
         self.speed = 1.0

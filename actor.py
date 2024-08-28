@@ -23,7 +23,7 @@ class Actor:
         self.game = game
         self.position = np.array([0.0, 0.0])
         self.velocity = np.array([0.0, 0.0])
-        self.scale: float = 0.0
+        self.scale: float = 1.0
         self.rotation: float = 0.0 # 傾き
         self.state: state = state.active
         self.__components: list[Component] = []
