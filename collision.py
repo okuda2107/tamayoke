@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import overload
 import numpy as np
 
 class Sphere :
@@ -20,6 +21,25 @@ class AABB :
         self.max_pos[0] = max(self.max_pos[0], point[0])
         self.max_pos[1] = max(self.max_pos[1], point[1])
 
+    def min_dist_sq(self, point: np.array) -> float:
+        dx: float = max(self.min_pos[0] - point[0], 0)
+        dx = max(dx, point[0] - self.max_pos[0])
+        dy: float = max(self.min_pos[1] - point[1], 0)
+        dy = max(dy, point[1] - self.max_pos[1])
+        return dx ** 2 + dy ** 2
+
+@overload
 def intersect(a: AABB, b: AABB) -> bool:
     no = a.max_pos[0] < b.min_pos[0] or a.max_pos[1] < b.min_pos[1] or b.max_pos[0] < a.min_pos[0] or b.max_pos[1] < a.min_pos[1]
     return not no
+
+@overload
+def intersect(s: Sphere, box: AABB) -> bool:
+    distSq = box.min_dist_sq(s.center)
+    return distSq <= (s.radius ** 2)
+
+@overload
+def intersect(a: Sphere, b: Sphere) -> bool:
+    dist_sq = np.sum((a.center - b.center) ** 2)
+    sum_radii = a.radius + b.radius
+    return dist_sq <= (sum_radii ** 2)
