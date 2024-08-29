@@ -6,6 +6,7 @@ if TYPE_CHECKING:
 
 from actor import Actor
 from component import Any
+from core import Core
 from box_component import BoxComponent
 from collision import AABB, intersect
 from sprite_component import SpriteComponent
@@ -31,6 +32,9 @@ class Test(Actor):
         bc = BoxComponent(actor)
         box = AABB(sc.image_size, self.game.screen_size)
         bc.set_object_box(box)
+
+        actor = Core(self.game)
+        actor.position = [0.5, 0.5]
 
         self.speed = 1.0
 
