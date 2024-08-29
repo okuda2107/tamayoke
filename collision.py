@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import overload
+from typing import overload, Union
 import numpy as np
 
 class Sphere :
@@ -43,3 +43,7 @@ def intersect(a: Sphere, b: Sphere) -> bool:
     dist_sq = np.sum((a.center - b.center) ** 2)
     sum_radii = a.radius + b.radius
     return dist_sq <= (sum_radii ** 2)
+
+# ここも考えもの 名前変えればいいだけか
+def intersect(a: Union[AABB, Sphere], b: Union[AABB, Sphere]) -> bool:
+    return True
