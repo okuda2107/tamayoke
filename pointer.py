@@ -9,8 +9,9 @@ if TYPE_CHECKING:
     from game import Game
 
 class Pointer(Actor):
-    def __init__(self, game: Game):
+    def __init__(self, game: Game, index: int):
         super().__init__(game)
+        self.index = index
         sc = SpriteComponent(self)
         sc.set_image('asset/pointer.png', (200, 200))
         cc = CircleComponent(self, Kind.pointer)

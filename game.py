@@ -2,12 +2,10 @@ from __future__ import annotations
 import pygame
 import numpy as np
 from phys_world import PhysWorld
-from physics import Physics
 from mediapipe_input import *
 import level_loader
 from audio_system import *
 from actor import *
-from title import *
 
 from text_component import *
 
