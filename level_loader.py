@@ -3,12 +3,9 @@ from typing import Any, TypeVar
 import json
 from game import *
 from actor import *
-from point_manager import *
-from result import *
-from test import Test
-
-from title import *
 from sprite_component import *
+
+from test import Test
 
 LEVEL_VERSION = 1
 
