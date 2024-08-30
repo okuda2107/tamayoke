@@ -62,6 +62,8 @@ class Game:
         for actor in self.__actors:
             actor.process_input(event_list)
         self.__is_updating_actors = False
+        # モーションの入力
+        self.mediapipe.detect_pose()
 
     def __update_game(self) -> None:
         delta_time: float = self.__ticks_counts.tick_busy_loop(25) / 1000

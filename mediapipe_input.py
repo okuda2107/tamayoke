@@ -26,11 +26,7 @@ class MediapipeInput:
             return
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image.flags.writeable = False
-        result = self.pose.process(image)
-        
-        if not result.pose_landmarks: return
-        
-        return result
+        self.result = self.pose.process(image)
     
 def camera_check():
     mp_drawing = mp.solutions.drawing_utils
