@@ -7,6 +7,8 @@ if TYPE_CHECKING:
 from actor import Actor
 from component import Any
 from core import Core
+from enemy import Enemy
+from pointer import Pointer
 from box_component import BoxComponent
 from collision import AABB, intersect
 from sprite_component import SpriteComponent
@@ -36,6 +38,11 @@ class Test(Actor):
         actor = Core(self.game)
         actor.position = [0.5, 0.5]
 
+        actor = Enemy(self.game)
+        actor.position = [0.5, 0.5]
+
+        actor = Pointer(self.game)
+
         self.speed = 1.0
 
     def __del__(self):
@@ -62,6 +69,6 @@ class Test(Actor):
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
-        self.position = self.position + self.velocity * delta_time
-        if intersect(self.game.physics.boxes[0].get_world_box(), self.game.physics.boxes[1].get_world_box()):
-            print("intersect!!!")
+        # self.position = self.position + self.velocity * delta_time
+        # if intersect(self.game.physics.boxes[0].get_world_box(), self.game.physics.boxes[1].get_world_box()):
+        #     print("intersect!!!")

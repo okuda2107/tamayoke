@@ -1,23 +1,29 @@
 from __future__ import annotations
-import numpy as np
-from mediapipe_input import *
-from game import *
-from actor import *
-from sprite_component import *
+from typing import TYPE_CHECKING
+from actor import Actor
+from sprite_component import SpriteComponent
+from circle_component import CircleComponent, Kind
+from collision import Sphere
 
-class pointer(Actor):
-    def __init__(self, game: Game, index: int, radius: float):
+if TYPE_CHECKING:
+    from game import Game
+
+class Pointer(Actor):
+    def __init__(self, game: Game):
         super().__init__(game)
-        self.radius = radius
-        self.index = index
         sc = SpriteComponent(self)
-        temp_radius = self.radius * self.game.screen_size[0]
-        sc.set_image("asset/pointer.png", (temp_radius, temp_radius))
-
+        sc.set_image('asset/pointer.png', (200, 200))
+        cc = CircleComponent(self, Kind.pointer)
+        sphere = Sphere()
+        sphere.center = self.position
+        sphere.radius = sc.image_size[0] / self.game.screen_size[0]
+        cc.set_sphere(sphere)
+       
     def __del__(self):
         return super().__del__()
 
-    def actor_input(self) -> None:
-        pose = self.game.mediapipe.detect_pose()
-        if pose != None:
-            self.position = np.array([pose.pose_landmarks.landmark[self.index].x, pose.pose_landmarks.landmark[self.index].y])
+    def actor_input(self, event) -> None:
+        pass
+        # pose = self.game.mediapipe.detect_pose()
+        # if pose != None:
+        #     self.position = np.array([pose.pose_landmarks.landmark[self.index].x, pose.pose_landmarks.landmark[self.index].y])
