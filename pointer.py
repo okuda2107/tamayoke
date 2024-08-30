@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+import numpy as np
 from actor import Actor
 from sprite_component import SpriteComponent
 from circle_component import CircleComponent, Kind
@@ -22,9 +23,8 @@ class Pointer(Actor):
        
     def __del__(self):
         return super().__del__()
-
-    def actor_input(self, event) -> None:
-        pass
-        # pose = self.game.mediapipe.detect_pose()
-        # if pose != None:
-        #     self.position = np.array([pose.pose_landmarks.landmark[self.index].x, pose.pose_landmarks.landmark[self.index].y])
+    
+    def update_actor(self, delta_time: float) -> None:
+        super().update_actor(delta_time)
+        point = self.game.mediapipe.result.pose_landmarks[self.index]
+        self.position = np.array([point.x, point.y])
