@@ -15,9 +15,9 @@ from pointer import Pointer
 class Test(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
-        # actor = Pointer(self.game, 15)
-        # sc = SpriteComponent(actor)
-        # sc.set_image('asset/pointer.png', (20, 20))
+        actor = Pointer(self.game, 15)
+        sc = SpriteComponent(actor)
+        sc.set_image('asset/pointer.png', (20, 20))
         p = Pose(self)
 
     def __del__(self):
