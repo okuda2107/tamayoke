@@ -6,6 +6,7 @@ from actor import *
 from sprite_component import *
 
 from test import Test
+from title import Title
 
 LEVEL_VERSION = 1
 

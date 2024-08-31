@@ -6,6 +6,7 @@ from mediapipe_input import *
 import level_loader
 from audio_system import *
 from actor import *
+from pose import Pose
 
 from text_component import *
 
@@ -120,5 +121,6 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        # level_loader.load_level(self, 'asset/title.json')
-        level_loader.load_level(self, 'asset/test.json')
+        level_loader.load_level(self, 'asset/entrypoint.json')
+        actor = Actor(self)
+        p = Pose(actor)
