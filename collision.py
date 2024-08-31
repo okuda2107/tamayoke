@@ -30,20 +30,28 @@ class AABB :
 
 @overload
 def intersect(a: AABB, b: AABB) -> bool:
-    no = a.max_pos[0] < b.min_pos[0] or a.max_pos[1] < b.min_pos[1] or b.max_pos[0] < a.min_pos[0] or b.max_pos[1] < a.min_pos[1]
-    return not no
+    pass
 
 @overload
 def intersect(s: Sphere, box: AABB) -> bool:
-    distSq = box.min_dist_sq(s.center)
-    return distSq <= (s.radius ** 2)
+    pass
 
 @overload
 def intersect(a: Sphere, b: Sphere) -> bool:
-    dist_sq = np.sum((a.center - b.center) ** 2)
-    sum_radii = a.radius + b.radius
-    return dist_sq <= (sum_radii ** 2)
+    pass
 
-# ここも考えもの 名前変えればいいだけか
 def intersect(a: Union[AABB, Sphere], b: Union[AABB, Sphere]) -> bool:
-    return True
+    if isinstance(a, AABB) and isinstance(b, AABB):
+        no = a.max_pos[0] < b.min_pos[0] or a.max_pos[1] < b.min_pos[1] or b.max_pos[0] < a.min_pos[0] or b.max_pos[1] < a.min_pos[1]
+        return not no
+    
+    if isinstance(a, Sphere) and isinstance(b, AABB):
+        distSq = b.min_dist_sq(a.center)
+        return distSq <= (a.radius ** 2)
+    
+    if isinstance(a, Sphere) and isinstance(b, Sphere):
+        dist_sq = np.sum((a.center - b.center) ** 2)
+        sum_radii = a.radius + b.radius
+        return dist_sq <= (sum_radii ** 2)
+
+    return False
