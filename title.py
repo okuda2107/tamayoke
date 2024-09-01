@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from actor import Actor
+from actor import Actor, state
 from sprite_component import SpriteComponent
 from collision import AABB, intersect
 from box_component import BoxComponent
@@ -30,14 +30,15 @@ class Title(Actor):
         bc.set_object_box(box)
 
     def __del__(self):
-        self.pointer.clear()
-        del self.logo
-        del self.button
-        super().__del__()
+        return super().__del__()
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
         for p in self.game.physics.circles[Kind.pointer.value]:
-            print('debug')
-            if intersect(p, self.game.physics.boxes[0]):
+            if intersect(p.circle, self.game.physics.boxes[0].get_world_box()):
                 print('intersect!!')
+                self.state = state.dead
+                for p in self.pointer:
+                    p.state = state.dead
+                self.logo.state = state.dead
+                self.button.state = state.dead
