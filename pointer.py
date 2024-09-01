@@ -14,7 +14,7 @@ class Pointer(Actor):
         super().__init__(game)
         self.index = index
         sc = SpriteComponent(self)
-        sc.set_image('asset/pointer.png', (200, 200))
+        sc.set_image('asset/pointer.png', (150, 150))
         cc = CircleComponent(self, Kind.pointer)
         sphere = Sphere()
         sphere.center = self.position
