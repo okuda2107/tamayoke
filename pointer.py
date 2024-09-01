@@ -26,5 +26,8 @@ class Pointer(Actor):
     
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
-        point = self.game.mediapipe.result.pose_landmarks.landmark[self.index]
-        self.position = np.array([point.x, point.y])
+        if self.game.mediapipe.result.pose_landmarks != None:
+            point = self.game.mediapipe.result.pose_landmarks.landmark[self.index]
+            self.position = np.array([point.x, point.y])
+        else:
+            self.position = [-1, -1]

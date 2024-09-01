@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import pygame
+import math
 from sprite_component import SpriteComponent
 
 if TYPE_CHECKING:
@@ -12,23 +13,29 @@ class Pose(SpriteComponent):
     def __init__(self, owner: Actor, draw_order: int = 10):
         super().__init__(owner, draw_order)
         self.color = (255, 255, 255)
-        self.face_radius = 200
-        self.radius = 20
-        self.thickness = 8
+        self.face_radius = 20
+        self.radius =10
+        self.thickness = 3
 
     def __del__(self):
         return super().__del__()
 
     def draw(self, screen: Surface) -> None:
-        pose = self._owner.game.mediapipe.result.pose_landmarks.landmark
+        pose = self._owner.game.mediapipe.result.pose_landmarks
+
+        if pose is None:
+            return
+        
+        pose = pose.landmark
         screen_size = self._owner.game.screen_size
 
         # 顔描画
+        face = math.sqrt((pose[0].x - pose[7].x) ** 2 + (pose[0].y - pose[7].y) ** 2) * screen_size[0]
         pygame.draw.circle(
             screen,
             self.color,
             (pose[0].x * screen_size[0], pose[0].y * screen_size[1]),
-            self.face_radius,
+            face,
             self.thickness,
         )
 
