@@ -13,6 +13,7 @@ class Pointer(Actor):
     def __init__(self, game: Game, index: int):
         super().__init__(game)
         self.index = index
+        self.position = [-1, -1]
         sc = SpriteComponent(self)
         sc.set_image('asset/pointer.png', (150, 150))
         cc = CircleComponent(self, Kind.pointer)
