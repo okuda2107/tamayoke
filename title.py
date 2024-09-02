@@ -6,6 +6,7 @@ from collision import AABB, intersect
 from box_component import BoxComponent
 from circle_component import Kind
 from pointer import Pointer
+from count import Count
 
 if TYPE_CHECKING:
     from game import Game
@@ -30,13 +31,13 @@ class Title(Actor):
         bc.set_object_box(box)
 
     def __del__(self):
-        return super().__del__()
+        super().__del__()
+        Count(self.game)
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
         for p in self.game.physics.circles[Kind.pointer.value]:
             if intersect(p.circle, self.game.physics.boxes[0].get_world_box()):
-                print('intersect!!')
                 self.state = state.dead
                 for p in self.pointer:
                     p.state = state.dead
