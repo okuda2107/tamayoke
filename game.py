@@ -61,6 +61,9 @@ class Game:
         for event in event_list:
             if event.type == pygame.QUIT:
                 self.__is_running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.__is_running = False
         self.__is_updating_actors = True
         for actor in self.__actors:
             actor.process_input(event_list)
