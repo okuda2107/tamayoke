@@ -32,7 +32,6 @@ class Title(Actor):
 
     def __del__(self):
         super().__del__()
-        Count(self.game, 1, [15, 16])
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
@@ -43,3 +42,4 @@ class Title(Actor):
                     p.state = state.dead
                 self.logo.state = state.dead
                 self.button.state = state.dead
+                Count(self.game, 1, [15, 16])

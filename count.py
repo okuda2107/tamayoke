@@ -20,13 +20,13 @@ class Count(Actor):
 
     def __del__(self):
         super().__del__()
-        PlayGround(self.game, self.core, self.pointer)
     
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
         self.timer -= delta_time
         if self.timer <= -1:
             self.state = state.dead
+            PlayGround(self.game, self.core, self.pointer)
         elif self.timer <= 0:
             self.tc.set_text('Go!!!')
         elif self.timer <= 1:

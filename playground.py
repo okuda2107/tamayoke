@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+import numpy as np
 from actor import Actor, state
 from collision import intersect
 from circle_component import Kind
@@ -15,8 +16,11 @@ class PlayGround(Actor):
         super().__init__(game)
         self.cores: list[Core] = []
         self.pointers: list[Pointer] = []
+        rng = np.random.default_rng()
         for _ in range(core):
-            self.cores.append(Core(self.game))
+            core = Core(self.game)
+            core.position = rng.uniform(0.1, 0.9, 2)
+            self.cores.append(core)
         for p in pointer:
             self.pointers.append(Pointer(self.game, p))
         # self.enemy_gen = EnemyGenerator(self.game)
@@ -29,7 +33,6 @@ class PlayGround(Actor):
 
     def __del__(self):
         super().__del__()
-        # Result(self.game)
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
@@ -57,3 +60,4 @@ class PlayGround(Actor):
         # self.enemy_gen.state = state.dead
         # for e in self.enemy_gen.enemies:
         #   e.state = state.dead
+        # Result(self.game)
