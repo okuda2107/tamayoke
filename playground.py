@@ -42,16 +42,16 @@ class PlayGround(Actor):
         for p in circles[Kind.pointer.value]:
             for c in circles[Kind.core.value]:
                 if intersect(p.circle, c.circle):
-                    self.dead_actors()
+                    self.next_scene()
                     return
                 for e in circles[Kind.enemy.value]:
                     if intersect(p.circle, e.circle):
                         e.get_owner().state = state.dead
                     if intersect(c.circle, e.circle):
-                        self.dead_actors()
+                        self.next_scene()
                         return
 
-    def dead_actors(self):
+    def next_scene(self):
         self.actor.state = state.dead
         for c in self.cores:
             c.state = state.dead
