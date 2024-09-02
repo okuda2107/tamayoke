@@ -8,18 +8,19 @@ if TYPE_CHECKING:
     from game import Game
 
 class Count(Actor):
-    def __init__(self, game: Game):
+    def __init__(self, game: Game, core: int, pointer: list[int]):
         super().__init__(game)
         self.position = [0.5, 0.5]
         self.tc = TextComponent(self, 100)
-        self.color = (255, 255, 255)
-        self.tc.set_text('3', self.color)
+        self.tc.set_color((255, 255, 255))
+        self.tc.set_text('3')
         self.timer = 3
+        self.core = core
+        self.pointer = pointer
 
     def __del__(self):
         super().__del__()
-        del self.tc
-        PlayGround(self.game)
+        PlayGround(self.game, self.core, self.pointer)
     
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
@@ -27,8 +28,8 @@ class Count(Actor):
         if self.timer <= -1:
             self.state = state.dead
         elif self.timer <= 0:
-            self.tc.set_text('Go!!!', self.color)
+            self.tc.set_text('Go!!!')
         elif self.timer <= 1:
-            self.tc.set_text('1', self.color)
+            self.tc.set_text('1')
         elif self.timer <= 2:
-            self.tc.set_text('2', self.color)
+            self.tc.set_text('2')

@@ -9,10 +9,14 @@ class TextComponent(SpriteComponent):
         super().__init__(owner)
         self.font = pygame.font.SysFont('microsoftsansserif', size)
         self.size = size
-        self.text: pygame.Surface
+        self.color = (0, 0, 0)
+        self.text: pygame.Surface = self.font.render('', True, self.color)
 
-    def set_text(self, text: str, color: tuple[int, int,int]):
-        self.text = self.font.render(text, True, color)
+    def set_text(self, text: str):
+        self.text = self.font.render(text, True, self.color)
+
+    def set_color(self, color: tuple[int, int, int]):
+        self.color = color
 
     def set_font(self, font: str):
         self.font = pygame.font.SysFont(font, self.size)

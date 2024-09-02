@@ -26,3 +26,6 @@ class CircleComponent(Component):
 
     def set_sphere(self, model: Sphere):
         self.circle = model
+
+    def get_owner(self):
+        return self._owner

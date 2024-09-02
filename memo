@@ -1,9 +1,0 @@
-ball_generatorにballのスプライトを決める処理を書いている
-
-point_managerでball_generatorの確率を決めている
-
-依存関係ファイル
-game -> title, entrypoint, pointer
-entrypoint -> ball_generator, point_manager, bar
-point_manager -> result
-result -> 最初に戻る

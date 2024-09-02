@@ -32,7 +32,7 @@ class Title(Actor):
 
     def __del__(self):
         super().__del__()
-        Count(self.game)
+        Count(self.game, 1, [15, 16])
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
