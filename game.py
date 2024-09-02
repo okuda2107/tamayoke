@@ -1,14 +1,16 @@
 from __future__ import annotations
+from typing import TYPE_CHECKING
 import pygame
 import numpy as np
+from audio_system import AudioSystem
 from phys_world import PhysWorld
-from mediapipe_input import *
+from mediapipe_input import MediapipeInput
 import level_loader
-from audio_system import *
-from actor import *
 from pose import Pose
+from actor import Actor, state
 
-from text_component import *
+if TYPE_CHECKING:
+    from sprite_component import SpriteComponent
 
 class Game:
     def __init__(self):
