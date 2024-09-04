@@ -16,7 +16,7 @@ class Core(Actor):
         super().__init__(game)
         rng = np.random.default_rng()
         self.forward: np.Array = rng.uniform(-1, 1, 2)
-        self.speed = random.uniform(0, 2)
+        self.speed = random.uniform(0, 1)
         sc = SpriteComponent(self)
         sc.set_image('asset/red.png', (200, 200))
         cc = CircleComponent(self, Kind.core)
