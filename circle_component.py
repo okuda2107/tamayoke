@@ -16,10 +16,12 @@ class CircleComponent(Component):
     def __init__(self, owner: Actor, kind: Kind):
         super().__init__(owner)
         self.circle: Sphere = None
+        self.kind = kind
         self._owner.game.physics.add_circle(self, kind)
 
     def __del__(self):
-        return super().__del__()
+        super().__del__()
+        self._owner.game.physics.remove_circle(self, self.kind)
 
     def update(self, delta_time: float):
         self.circle.center = self._owner.position
