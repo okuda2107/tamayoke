@@ -23,7 +23,7 @@ class PlayGround(Actor):
             self.cores.append(core)
         for p in pointer:
             self.pointers.append(Pointer(self.game, p))
-        # self.enemy_gen = EnemyGenerator(self.game)
+        self.enemy_gen = EnemyGenerator(self.game)
         self.timer = 0
         self.actor = Actor(self.game)
         self.actor.position = [0, 0]
@@ -57,7 +57,7 @@ class PlayGround(Actor):
             c.state = state.dead
         for p in self.pointers:
             p.state = state.dead
-        # self.enemy_gen.state = state.dead
-        # for e in self.enemy_gen.enemies:
-        #   e.state = state.dead
+        self.enemy_gen.state = state.dead
+        for e in self.enemy_gen.enemies:
+          e.state = state.dead
         # Result(self.game)

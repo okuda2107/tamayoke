@@ -38,7 +38,8 @@ class Game:
             camera_check()
             return False
         pygame.display.set_caption("tama|wake")
-        self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
+        # self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
+        self.__screen = pygame.display.set_mode(self.screen_size, pygame.RESIZABLE)
         self.screen_size = np.array(self.__screen.get_size())
         if self.__screen == None:
             print(pygame.get_error())
@@ -126,7 +127,7 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        level_loader.load_level(self, 'asset/entrypoint.json')
-        # level_loader.load_level(self, 'asset/test.json')
+        # level_loader.load_level(self, 'asset/entrypoint.json')
+        level_loader.load_level(self, 'asset/test.json')
         actor = Actor(self)
         p = Pose(actor)
