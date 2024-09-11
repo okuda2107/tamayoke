@@ -14,7 +14,7 @@ class MediapipeInput:
 
     def initialize(self) -> bool:
         return True
-    
+
     def shutdown(self) -> None:
         self.cap.release()
 
@@ -27,7 +27,7 @@ class MediapipeInput:
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image.flags.writeable = False
         self.result = self.pose.process(image)
-    
+
 def camera_check():
     mp_drawing = mp.solutions.drawing_utils
     mp_holistic = mp.solutions.holistic

@@ -23,7 +23,7 @@ class Component:
     @abstractmethod
     def get_type(self):
         return TypeID.t_component
-    
+
     @abstractmethod
     def load_properties(self, obj: dict[str, Any]) -> None:
         update_order_data = obj.get('updateOrder')

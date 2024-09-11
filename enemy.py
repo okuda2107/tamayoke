@@ -32,4 +32,4 @@ class Enemy(Actor):
 
     def __del__(self):
         super().__del__()
-        self.parent.remove_enemy(self)    
+        self.parent.remove_enemy(self)

@@ -1,10 +1,12 @@
+"""this module has flamework of game"""
+
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import pygame
 import numpy as np
 from audio_system import AudioSystem
 from phys_world import PhysWorld
-from mediapipe_input import MediapipeInput
+from mediapipe_input import MediapipeInput, camera_check
 import level_loader
 from pose import Pose
 from actor import Actor, state
@@ -13,6 +15,7 @@ if TYPE_CHECKING:
     from sprite_component import SpriteComponent
 
 class Game:
+    """this class is base of game"""
     def __init__(self):
         self.__is_running: bool = True
         self.__is_updating_actors: bool = False
@@ -20,6 +23,7 @@ class Game:
         self.physics = PhysWorld(self)
         self.mediapipe = MediapipeInput()
         self.audio_system = AudioSystem()
+        self.__screen = None
         self.screen_size = np.array([1300, 700]) # (1300, 700)
         self.camera_check_mode: bool = False
         self.__actors: list[Actor] = []
@@ -29,6 +33,7 @@ class Game:
         self.point = 0
 
     def initialize(self) -> bool:
+        """this method initial game"""
         result = pygame.init()
         if result[1] != 0:
             print(pygame.get_error())
@@ -41,7 +46,7 @@ class Game:
         # self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
         self.__screen = pygame.display.set_mode(self.screen_size, pygame.RESIZABLE)
         self.screen_size = np.array(self.__screen.get_size())
-        if self.__screen == None:
+        if self.__screen is None:
             print(pygame.get_error())
             return False
         if not self.mediapipe.initialize():
@@ -50,7 +55,7 @@ class Game:
         self.__ticks_counts = pygame.time.Clock()
         self.__load_data()
         return True
-    
+
     def run_loop(self) -> None:
         while self.__is_running:
             self.__process_input()
@@ -130,4 +135,4 @@ class Game:
         level_loader.load_level(self, 'asset/entrypoint.json')
         # level_loader.load_level(self, 'asset/test.json')
         actor = Actor(self)
-        p = Pose(actor)
+        Pose(actor)

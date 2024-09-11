@@ -28,4 +28,3 @@ class Core(Actor):
 
     def __del__(self):
         return super().__del__()
-    

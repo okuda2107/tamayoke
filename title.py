@@ -21,7 +21,7 @@ class Title(Actor):
         self.logo.position = [0.5, 0.4]
         sc = SpriteComponent(self.logo)
         sc.set_image('asset/title.png', (200, 150))
-        
+
         self.button = Actor(self.game)
         self.button.position = [0.5, 0.6]
         sc = SpriteComponent(self.button)

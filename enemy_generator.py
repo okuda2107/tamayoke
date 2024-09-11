@@ -15,7 +15,7 @@ class EnemyGenerator(Actor):
         self.position = [random.uniform(0, 1), 0.05]
         self.speed = 1.0
         self.forward = np.array([1, 0])
-        
+
     def __del__(self):
         super().__del__()
         while self.enemies:
@@ -37,7 +37,7 @@ class EnemyGenerator(Actor):
         if self.position[1] <= 0.05 and (self.forward == np.array([0, -1])).all():
             self.position = np.array([0.05, 0.05])
             self.forward = np.array([1, 0])
-        
+
         # enemyを生成
         if random.uniform(0, 1) < 0.05:
             Enemy(self.game, self)

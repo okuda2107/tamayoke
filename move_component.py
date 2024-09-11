@@ -13,7 +13,7 @@ class MoveComponent(Component):
         super().__init__(owner)
         self.speed: float = 0.0
         self.forward: np.ndarray = np.array([0.0, 0.0])
-    
+
     def __del__(self):
         super().__del__()
 

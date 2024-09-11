@@ -25,7 +25,7 @@ class Pose(SpriteComponent):
 
         if pose is None:
             return
-        
+
         pose = pose.landmark
         screen_size = self._owner.game.screen_size
 

@@ -21,10 +21,10 @@ class Pointer(Actor):
         sphere.center = self.position
         sphere.radius = sc.image_size[0] / self.game.screen_size[0]
         cc.set_sphere(sphere)
-       
+
     def __del__(self):
         return super().__del__()
-    
+
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
         if self.game.mediapipe.result.pose_landmarks != None:

@@ -25,7 +25,7 @@ class SpriteComponent(Component):
 
     def get_type(self):
         return TypeID.t_sprite_component
-    
+
     def load_properties(self, obj: dict[str, Any]) -> None:
         super().load_properties(obj)
         sprite_data = obj.get('sprite')
