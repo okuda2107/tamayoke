@@ -21,7 +21,7 @@ class MoveComponent(Component):
     def set_forward(self, direction: np.ndarray):
         self.forward = direction / np.linalg.norm(direction, ord=2)
 
-# 反射も含めた
+# 反射も含めた 反射含めるのあんまりよくない気がする．責務が...
     def update(self, delta_time: float):
         pre_position = copy.deepcopy(self._owner.position)
         self._owner.position = self._owner.position + self.forward * self.speed * delta_time

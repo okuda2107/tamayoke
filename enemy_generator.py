@@ -48,4 +48,5 @@ class EnemyGenerator(Actor):
         self.enemies.append(enemy)
 
     def remove_enemy(self, enemy: Enemy):
-        self.enemies.remove(enemy)
+        if enemy in self.enemies:
+            self.enemies.remove(enemy)
