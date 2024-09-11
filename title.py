@@ -27,7 +27,7 @@ class Title(Actor):
         sc = SpriteComponent(self.button)
         sc.set_image('asset/red.png', (200, 150))
         bc = BoxComponent(self.button)
-        box = AABB(sc.image_size, self.game.screen_size)
+        box = AABB(sc.image_size / self.game.screen_size)
         bc.set_object_box(box)
 
     def __del__(self):

@@ -10,8 +10,7 @@ class AABB :
     min_pos = np.array([0.0, 0.0])
     max_pos = np.array([0.0, 0.0])
 
-    def __init__(self, size: np.array, screensize: np.array):
-        normalize_size = size / screensize
+    def __init__(self, normalize_size: np.array):
         self.min_pos = - normalize_size / 2
         self.max_pos = normalize_size / 2
 
@@ -20,6 +19,10 @@ class AABB :
         self.min_pos[1] = min(self.min_pos[1], point[1])
         self.max_pos[0] = max(self.max_pos[0], point[0])
         self.max_pos[1] = max(self.max_pos[1], point[1])
+
+    def contains(self, point: np.array) -> bool:
+        outside: bool = point[0] < self.min_pos[0] or point[1] < self.min_pos[1] or point[0] > self.max_pos[0] or point[1] > self.max_pos[1]
+        return not outside
 
     def min_dist_sq(self, point: np.array) -> float:
         dx: float = max(self.min_pos[0] - point[0], 0)
