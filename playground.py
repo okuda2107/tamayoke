@@ -62,6 +62,6 @@ class PlayGround(Actor):
             p.state = state.dead
         self.enemy_gen.state = state.dead
         for e in self.enemy_gen.enemies:
-          e.state = state.dead
+            e.state = state.dead
         level_loader.load_level(self.game, 'asset/entrypoint.json')
         # Result(self.game)
