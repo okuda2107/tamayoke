@@ -4,8 +4,8 @@ import random
 import numpy as np
 from actor import Actor
 from sprite_component import SpriteComponent
-from move_component import MoveComponent
-from collision import Sphere
+from move_and_turn_component import MoveAndTurnComponent
+from collision import Sphere, AABB
 from circle_component import CircleComponent, Kind
 
 if TYPE_CHECKING:
@@ -19,7 +19,10 @@ class Enemy(Actor):
         self.parent.add_enemy(self)
         self.position = parent.position
         rng = np.random.default_rng()
-        mc = MoveComponent(self)
+        box = AABB(np.array([0, 0]))
+        box.min_pos = [-0.1, -0.1]
+        box.max_pos = [1.1, 1.1]
+        mc = MoveAndTurnComponent(self, box)
         mc.speed = 0.1
         mc.set_forward(rng.uniform(-1, 1, 2))
         sc = SpriteComponent(self)

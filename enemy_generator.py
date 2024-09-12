@@ -12,7 +12,7 @@ class EnemyGenerator(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         self.enemies: list[Enemy] = []
-        self.position = [random.uniform(0, 1), 0.05]
+        self.position = np.array([random.uniform(0, 1), 0])
         self.speed = 1.0
         self.forward = np.array([1, 0])
 
@@ -25,17 +25,17 @@ class EnemyGenerator(Actor):
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
         # 画面端をキープ
-        if self.position[0] >= 0.95 and (self.forward == np.array([1, 0])).all():
-            self.position = np.array([0.95, 0.05])
+        if self.position[0] >= 1 and (self.forward == np.array([1, 0])).all():
+            self.position = np.array([1, 0])
             self.forward = np.array([0, 1])
-        if self.position[1] >= 0.95 and (self.forward == np.array([0, 1])).all():
-            self.position = np.array([0.95, 0.95])
+        if self.position[1] >= 1 and (self.forward == np.array([0, 1])).all():
+            self.position = np.array([1, 1])
             self.forward = np.array([-1, 0])
-        if self.position[0] <= 0.05 and (self.forward == np.array([-1, 0])).all():
-            self.position = np.array([0.05, 0.95])
+        if self.position[0] <= 0 and (self.forward == np.array([-1, 0])).all():
+            self.position = np.array([0, 1])
             self.forward = np.array([0, -1])
-        if self.position[1] <= 0.05 and (self.forward == np.array([0, -1])).all():
-            self.position = np.array([0.05, 0.05])
+        if self.position[1] <= 0 and (self.forward == np.array([0, -1])).all():
+            self.position = np.array([0, 0])
             self.forward = np.array([1, 0])
 
         # enemyを生成

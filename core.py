@@ -3,9 +3,9 @@ from typing import TYPE_CHECKING
 import numpy as np
 import random
 from actor import Actor
-from collision import Sphere
+from collision import Sphere, AABB
 from sprite_component import SpriteComponent
-from move_component import MoveComponent
+from move_and_turn_component import MoveAndTurnComponent
 from circle_component import CircleComponent, Kind
 
 if TYPE_CHECKING:
@@ -15,7 +15,10 @@ class Core(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         rng = np.random.default_rng()
-        mc = MoveComponent(self)
+        box = AABB(np.array([0, 0]))
+        box.min_pos = [0.2, 0.2]
+        box.max_pos = [0.8, 0.8]
+        mc = MoveAndTurnComponent(self, box)
         mc.set_forward(rng.uniform(-1, 1, 2))
         mc.speed = 0.1
         sc = SpriteComponent(self)

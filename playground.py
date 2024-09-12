@@ -21,7 +21,7 @@ class PlayGround(Actor):
         rng = np.random.default_rng()
         for _ in range(core):
             core = Core(self.game)
-            core.position = rng.uniform(0.1, 0.9, 2)
+            core.position = rng.uniform(0.3, 0.7, 2)
             self.cores.append(core)
         for p in pointer:
             self.pointers.append(Pointer(self.game, p))
