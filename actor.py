@@ -17,6 +17,7 @@ from component import *
 class state(Enum):
     active = 1
     dead = 2
+    paused = 3
 
 class Actor:
     def __init__(self, game: Game):
