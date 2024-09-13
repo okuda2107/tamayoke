@@ -2,12 +2,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 import numpy as np
 from actor import Actor, state
-import level_loader
 from collision import intersect
 from circle_component import Kind
 from core import Core
 from pointer import Pointer
 from enemy_generator import EnemyGenerator
+from result import Result
 from text_component import TextComponent
 
 if TYPE_CHECKING:
@@ -63,5 +63,4 @@ class PlayGround(Actor):
         self.enemy_gen.state = state.dead
         for e in self.enemy_gen.enemies:
             e.state = state.dead
-        level_loader.load_level(self.game, 'asset/entrypoint.json')
-        # Result(self.game)
+        Result(self.game, "game over")
