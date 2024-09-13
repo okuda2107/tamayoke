@@ -58,6 +58,8 @@ scoreSize|数字の大きさ
 textPos|"Your Score is"の文字の位置
 textSize|"Your Score is"の文字の大きさ
 
+# For Developper
+
 ## 開発環境
 python 3.9.13
 
@@ -67,3 +69,10 @@ python 3.9.13
 1. `source {venv_name}/bin/activate`でvenv起動 windowsの場合は`{venv_name}/Scripts/activate`
 1. `pip install -r requirements.txt`をコマンドで叩く
 1. `deactivate`でvenvから抜ける
+
+## release方法
+exeファイルを作ってリリース
+1. pyinstallerをinstall
+1. main.specファイルを書く
+1. `pyinstaller main.spec`を叩く
+1. main.exeができるので，assetと一緒にリリース
