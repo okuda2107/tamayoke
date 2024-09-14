@@ -17,6 +17,6 @@ class CircleSpriteComponent(SpriteComponent):
         pygame.draw.circle(
             screen,
             self.color,
-            (self._owner.position[0] * self._owner.game.screen_size[0], self._owner.position[1] * self._owner.game.screen_size[1]),
+            (self._owner.position[0], self._owner.position[1]),
             self.radius
         )

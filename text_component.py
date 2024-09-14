@@ -22,5 +22,4 @@ class TextComponent(SpriteComponent):
         self.font = pygame.font.SysFont(font, self.size)
 
     def draw(self, screen: pygame.Surface) -> None:
-        position = self._calc_disp_position()
-        screen.blit(self.text, tuple(position))
+        screen.blit(self.text, tuple(self._owner.position))

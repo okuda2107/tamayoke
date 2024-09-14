@@ -14,8 +14,9 @@ from pointer import Pointer
 from core import Core
 from enemy import Enemy
 from enemy_generator import EnemyGenerator
-from collision import Sphere
+from collision import Sphere, intersect, AABB
 from circle_component import CircleComponent, Kind
+from box_component import BoxComponent
 from move_component import MoveComponent
 from circle_sprite_component import CircleSpriteComponent
 
@@ -23,17 +24,31 @@ class Test(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
         self.a1 = Actor(self.game)
-        self.a1.position = [0.5, 0.5]
+        self.a1.position = np.array([0, 0])
         csc = CircleSpriteComponent(self.a1)
         csc.color = (255, 83, 182)
         csc.radius = 200
-        cc = CircleComponent(self.a1, Kind.core)
+        self.cc1 = CircleComponent(self.a1, Kind.core)
         sphere = Sphere()
-        sphere.center = self.position
-        sphere.radius = csc.radius / self.game.screen_size[0]
-        cc.set_sphere(sphere)
+        sphere.center = self.a1.position
+        sphere.radius = csc.radius
+        self.cc1.set_sphere(sphere)
         self.mc = MoveComponent(self.a1)
-        self.mc.speed = 0.1
+        self.mc.speed = 100
+
+        a2 = Actor(self.game)
+        a2.position = self.game.screen_size * 0.5
+        csc = CircleSpriteComponent(a2)
+        csc.color = (233, 231, 122)
+        csc.radius = 100
+        # self.cc2 = CircleComponent(a2, Kind.core)
+        # sphere = Sphere()
+        # sphere.center = a2.position
+        # sphere.radius = csc.radius
+        # self.cc2.set_sphere(sphere)
+        self.cc2 = BoxComponent(a2)
+        box = AABB(np.array([200, 200]))
+        self.cc2.set_object_box(box)
 
     def __del__(self):
         super().__del__()
@@ -58,3 +73,7 @@ class Test(Actor):
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
+        if intersect(self.cc1.circle, self.cc2.get_world_box()):
+            print(self.cc1.circle.radius)
+            print(self.cc1.circle)
+            print('intersect!!!')

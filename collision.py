@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import overload, Union
 import numpy as np
 
+'''pixel数を入力する'''
 class Sphere :
     center = np.array([0.0, 0.0])
     radius: float = 0.0
@@ -10,9 +11,9 @@ class AABB :
     min_pos = np.array([0.0, 0.0])
     max_pos = np.array([0.0, 0.0])
 
-    def __init__(self, normalize_size: np.array):
-        self.min_pos = - normalize_size / 2
-        self.max_pos = normalize_size / 2
+    def __init__(self, size: np.array):
+        self.min_pos = - size / 2
+        self.max_pos = size / 2
 
     def update_min_max(self, point: np.array) -> None:
         self.min_pos[0] = min(self.min_pos[0], point[0])
@@ -53,8 +54,8 @@ def intersect(a: Union[AABB, Sphere], b: Union[AABB, Sphere]) -> bool:
         return distSq <= (a.radius ** 2)
 
     if isinstance(a, Sphere) and isinstance(b, Sphere):
-        dist_sq = np.sum((a.center - b.center) ** 2)
+        dist_sq = np.linalg.norm((a.center - b.center))
         sum_radii = a.radius + b.radius
-        return dist_sq <= (sum_radii ** 2)
+        return dist_sq <= sum_radii
 
     return False
