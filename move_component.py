@@ -19,7 +19,10 @@ class MoveComponent(Component):
 
     # 正規化してくれる
     def set_forward(self, direction: np.ndarray):
-        self.forward = direction / np.linalg.norm(direction, ord=2)
+        if  np.linalg.norm(direction, ord=2) != 0:
+            self.forward = direction / np.linalg.norm(direction, ord=2)
+        else:
+            self.forward = np.array([0.0, 0.0])
 
     def update(self, delta_time: float):
         self._owner.position = self._owner.position + self.forward * self.speed * delta_time
