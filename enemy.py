@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 import random
 import numpy as np
 from actor import Actor
-from sprite_component import SpriteComponent
+from circle_sprite_component import CircleSpriteComponent
 from move_and_turn_component import MoveAndTurnComponent
 from collision import Sphere, AABB
 from circle_component import CircleComponent, Kind
@@ -20,17 +20,18 @@ class Enemy(Actor):
         self.position = parent.position
         rng = np.random.default_rng()
         box = AABB(np.array([0, 0]))
-        box.min_pos = [-0.1, -0.1]
-        box.max_pos = [1.1, 1.1]
+        box.min_pos = self.game.screen_size * [-0.1, -0.1]
+        box.max_pos = self.game.screen_size * [1.1, 1.1]
         mc = MoveAndTurnComponent(self, box)
-        mc.speed = 0.1
+        mc.speed = 10
         mc.set_forward(rng.uniform(-1, 1, 2))
-        sc = SpriteComponent(self)
-        sc.set_image('asset/white.png', (20, 20))
+        csc = CircleSpriteComponent(self)
+        csc.color = (255, 255, 255)
+        csc.radius = 20
         cc = CircleComponent(self, Kind.enemy)
         sphere = Sphere()
         sphere.center = self.position
-        sphere.radius = sc.image_size[0] / self.game.screen_size[0]
+        sphere.radius = csc.radius
         cc.set_sphere(sphere)
 
     def __del__(self):

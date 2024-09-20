@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Count(Actor):
     def __init__(self, game: Game, core: int, pointer: list[int]):
         super().__init__(game)
-        self.position = [0.5, 0.5]
+        self.position = self.game.screen_size * [0.5, 0.5]
         self.tc = TextComponent(self, 100)
         self.tc.set_color((255, 255, 255))
         self.tc.set_text('3')

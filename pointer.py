@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 import numpy as np
 from actor import Actor
-from sprite_component import SpriteComponent
+from circle_sprite_component import CircleSpriteComponent
 from circle_component import CircleComponent, Kind
 from collision import Sphere
 
@@ -13,13 +13,14 @@ class Pointer(Actor):
     def __init__(self, game: Game, index: int):
         super().__init__(game)
         self.index = index
-        self.position = [-1, -1]
-        sc = SpriteComponent(self)
-        sc.set_image('asset/pointer.png', (150, 150))
+        self.position = self.game.screen_size * [-1, -1]
+        csc = CircleSpriteComponent(self)
+        csc.color = (233, 231, 122)
+        csc.radius = 150
         cc = CircleComponent(self, Kind.pointer)
         sphere = Sphere()
         sphere.center = self.position
-        sphere.radius = sc.image_size[0] / self.game.screen_size[0]
+        sphere.radius = csc.radius
         cc.set_sphere(sphere)
 
     def __del__(self):

@@ -21,14 +21,14 @@ class PlayGround(Actor):
         rng = np.random.default_rng()
         for _ in range(core):
             core = Core(self.game)
-            core.position = rng.uniform(0.3, 0.7, 2)
+            core.position = self.game.screen_size * rng.uniform(0.3, 0.7, 2)
             self.cores.append(core)
         for p in pointer:
             self.pointers.append(Pointer(self.game, p))
         self.enemy_gen = EnemyGenerator(self.game)
         self.timer = 0
         self.actor = Actor(self.game)
-        self.actor.position = [0, 0]
+        self.actor.position = self.game.screen_size * [0, 0]
         self.tc = TextComponent(self.actor, 80)
         self.tc.set_color((255, 255, 255))
         self.tc.set_text('Time: ' + str(round(self.timer, 1)))
