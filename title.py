@@ -24,8 +24,6 @@ class Title(Actor):
 
         self.button = Actor(self.game)
         self.button.position = self.game.screen_size * [0.5, 0.6]
-        print(self.button.position)
-        print(self.pointer[0].position, self.pointer[1].position)
         sc = SpriteComponent(self.button)
         sc.set_image('asset/red.png', (200, 150))
         bc = BoxComponent(self.button)
