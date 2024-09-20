@@ -23,7 +23,7 @@ class Enemy(Actor):
         box.min_pos = self.game.screen_size * [-0.1, -0.1]
         box.max_pos = self.game.screen_size * [1.1, 1.1]
         mc = MoveAndTurnComponent(self, box)
-        mc.speed = 10
+        mc.speed = 100
         mc.set_forward(rng.uniform(-1, 1, 2))
         csc = CircleSpriteComponent(self)
         csc.color = (255, 255, 255)
