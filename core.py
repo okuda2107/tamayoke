@@ -25,7 +25,7 @@ class Core(Actor):
         mc.speed = 100
         csc = CircleSpriteComponent(self)
         csc.color = (255, 83, 182)
-        csc.radius = 100
+        csc.radius = self.game.screen_size[1] * 0.05
         cc = CircleComponent(self, Kind.core)
         sphere = Sphere()
         sphere.center = self.position

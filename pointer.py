@@ -16,7 +16,7 @@ class Pointer(Actor):
         self.position = self.game.screen_size * [-1, -1]
         csc = CircleSpriteComponent(self)
         csc.color = (233, 231, 122)
-        csc.radius = 100
+        csc.radius = self.game.screen_size[1] * 0.05
         cc = CircleComponent(self, Kind.pointer)
         sphere = Sphere()
         sphere.center = self.position

@@ -27,7 +27,7 @@ class Enemy(Actor):
         mc.set_forward(rng.uniform(-1, 1, 2))
         csc = CircleSpriteComponent(self)
         csc.color = (255, 255, 255)
-        csc.radius = 20
+        csc.radius = self.game.screen_size[1] * 0.01
         cc = CircleComponent(self, Kind.enemy)
         sphere = Sphere()
         sphere.center = self.position
