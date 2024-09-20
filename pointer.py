@@ -16,7 +16,7 @@ class Pointer(Actor):
         self.position = self.game.screen_size * [-1, -1]
         csc = CircleSpriteComponent(self)
         csc.color = (233, 231, 122)
-        csc.radius = 150
+        csc.radius = 100
         cc = CircleComponent(self, Kind.pointer)
         sphere = Sphere()
         sphere.center = self.position
@@ -30,6 +30,6 @@ class Pointer(Actor):
         super().update_actor(delta_time)
         if self.game.mediapipe.result.pose_landmarks != None:
             point = self.game.mediapipe.result.pose_landmarks.landmark[self.index]
-            self.position = np.array([point.x, point.y])
+            self.position = self.game.screen_size * np.array([point.x, point.y])
         else:
-            self.position = [-1, -1]
+            self.position = self.game.screen_size * [-1, -1]
