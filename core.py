@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 class Core(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
+        self.position = self.game.screen_size * 0.5
         rng = np.random.default_rng()
         box = AABB(np.array([0, 0]))
         box.min_pos = self.game.screen_size * [0.2, 0.2]
