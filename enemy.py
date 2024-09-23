@@ -18,13 +18,11 @@ class Enemy(Actor):
         self.parent = parent
         self.parent.add_enemy(self)
         self.position = parent.position
-        rng = np.random.default_rng()
         box = AABB(np.array([0, 0]))
         box.min_pos = self.game.screen_size * [-0.1, -0.1]
         box.max_pos = self.game.screen_size * [1.1, 1.1]
-        mc = MoveAndTurnComponent(self, box)
-        mc.speed = 100
-        mc.set_forward(rng.uniform(-1, 1, 2))
+        self.mc = MoveAndTurnComponent(self, box)
+        self.mc.speed = 100
         csc = CircleSpriteComponent(self)
         csc.color = (255, 255, 255)
         csc.radius = self.game.screen_size[1] * 0.01

@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import numpy as np
+import random
 from actor import Actor, state
 from collision import intersect
 from circle_component import Kind
@@ -39,6 +40,7 @@ class PlayGround(Actor):
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
+        self.enemy_gen.target_pos = random.choice(self.cores).position
         self.timer += delta_time
         self.tc.set_text('Time: ' + str(round(self.timer, 1)))
         circles = self.game.physics.circles

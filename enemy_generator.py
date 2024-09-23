@@ -13,6 +13,7 @@ class EnemyGenerator(Actor):
         super().__init__(game)
         self.enemies: list[Enemy] = []
         self.position = self.game.screen_size * np.array([random.uniform(0, 1), 0])
+        self.target_pos = np.array([0, 0])
         self.speed = 1000
         self.forward = np.array([1, 0])
 
@@ -40,7 +41,8 @@ class EnemyGenerator(Actor):
 
         # enemyを生成
         if random.uniform(0, 1) < 0.05:
-            Enemy(self.game, self)
+            e = Enemy(self.game, self)
+            e.mc.set_forward(self.target_pos - self.position)
 
         self.position = self.position + self.forward * self.speed * delta_time
 
