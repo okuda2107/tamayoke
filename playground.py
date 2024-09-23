@@ -30,6 +30,7 @@ class PlayGround(Actor):
         self.actor = Actor(self.game)
         self.actor.position = self.game.screen_size * [0, 0]
         self.tc = TextComponent(self.actor, 80)
+        self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         self.tc.set_color((255, 255, 255))
         self.tc.set_text('Time: ' + str(round(self.timer, 1)))
 

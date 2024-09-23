@@ -13,6 +13,7 @@ class Count(Actor):
         self.position = self.game.screen_size * [0.5, 0.5]
         self.tc = TextComponent(self, 100)
         self.tc.set_color((255, 255, 255))
+        self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         self.tc.set_text('3')
         self.timer = 3
         self.core = core

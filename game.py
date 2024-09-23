@@ -134,7 +134,7 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        # level_loader.load_level(self, 'asset/entrypoint.json')
-        level_loader.load_level(self, 'asset/test.json')
+        level_loader.load_level(self, 'asset/entrypoint.json')
+        # level_loader.load_level(self, 'asset/test.json')
         actor = Actor(self)
         Pose(actor)

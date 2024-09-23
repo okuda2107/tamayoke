@@ -12,6 +12,7 @@ class Result(Actor):
         super().__init__(game)
         self.position = self.game.screen_size * [0.5, 0.5]
         tc = TextComponent(self, 100)
+        tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         tc.set_color((255, 255, 255))
         tc.set_text(text)
         self.timer = 0

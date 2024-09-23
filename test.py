@@ -19,6 +19,7 @@ from circle_component import CircleComponent, Kind
 from box_component import BoxComponent
 from move_component import MoveComponent
 from circle_sprite_component import CircleSpriteComponent
+from text_component import TextComponent
 
 class Test(Actor):
     def __init__(self, game: Game):
@@ -54,6 +55,12 @@ class Test(Actor):
         c.position = self.game.screen_size * 0.5
         p = Pointer(self.game, 15)
         EnemyGenerator(self.game)
+
+        a = Actor(self.game)
+        tc = TextComponent(a, 100)
+        tc.set_color((255, 255, 255))
+        tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
+        tc.set_text('test')
 
     def __del__(self):
         super().__del__()
