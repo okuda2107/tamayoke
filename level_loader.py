@@ -51,6 +51,9 @@ def load_game_properties(game: Game, file_name: str) -> bool:
         check_flag = data.get('cameraCheck')
         if check_flag != None:
             game.camera_check_mode = check_flag
+        camera_num = data.get('cameraNumber')
+        if camera_num != None:
+            game.camera_num = camera_num
 
 def load_actors(game: Game, arr: list[dict[str, Any]]) -> None:
     for obj in arr:

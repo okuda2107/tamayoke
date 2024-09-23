@@ -21,11 +21,12 @@ class Game:
         self.__is_updating_actors: bool = False
         self.__ticks_counts: pygame.time.Clock
         self.physics = PhysWorld(self)
-        self.mediapipe = MediapipeInput()
+        self.mediapipe = None
         self.audio_system = AudioSystem()
         self.__screen = None
         self.screen_size = np.array([1300, 700]) # (1300, 700)
         self.camera_check_mode: bool = False
+        self.camera_num = 0
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []
@@ -39,6 +40,7 @@ class Game:
             print(pygame.get_error())
             return False
         level_loader.load_game_properties(self, 'asset/GameProperty.json')
+        self.mediapipe = MediapipeInput(self.camera_num)
         if self.camera_check_mode:
             camera_check()
             return False
@@ -132,7 +134,7 @@ class Game:
             self.__sprites.remove(sprite_comp)
 
     def __load_data(self) -> None:
-        level_loader.load_level(self, 'asset/entrypoint.json')
-        # level_loader.load_level(self, 'asset/test.json')
+        # level_loader.load_level(self, 'asset/entrypoint.json')
+        level_loader.load_level(self, 'asset/test.json')
         actor = Actor(self)
         Pose(actor)

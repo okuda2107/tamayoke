@@ -2,6 +2,7 @@
     "version": 1,
     "properties": {
         "screenSize": [1300, 700],
-        "cameraCheck": false
+        "cameraCheck": false,
+        "cameraNumber": 0
     }
 }

@@ -1,18 +1,19 @@
 import mediapipe as mp
 import cv2
 
-CAMERA_NUMBER = 0
-
 class MediapipeInput:
-    def __init__(self):
+    def __init__(self, cam_num):
         self.mp_pose = mp.solutions.pose
 
         self.pose = self.mp_pose.Pose(
             static_image_mode=False, #Falseにしたら最初に捉えた人物にlandmarkを置き続けて処理が軽くなる？
         )
-        self.cap = cv2.VideoCapture(CAMERA_NUMBER)
+        self.cap = cv2.VideoCapture(cam_num)
 
     def initialize(self) -> bool:
+        if not self.cap.isOpened():
+            print('failed to initialize camera')
+            return False
         return True
 
     def shutdown(self) -> None:
