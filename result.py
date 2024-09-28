@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Result(Actor):
     def __init__(self, game: Game, text: str):
         super().__init__(game)
-        self.position = self.game.screen_size * [0.5, 0.5]
+        self.position = self.game.screen_size * [0.25, 0.4]
         tc = TextComponent(self, 100)
         tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         tc.set_color((255, 255, 255))

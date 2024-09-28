@@ -73,4 +73,4 @@ class PlayGround(Actor):
         self.enemy_gen.state = state.dead
         for e in self.enemy_gen.enemies:
             e.state = state.dead
-        Result(self.game, "game over")
+        Result(self.game, 'Time: ' + str(round(self.timer, 1)))

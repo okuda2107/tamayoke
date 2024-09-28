@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 class Count(Actor):
     def __init__(self, game: Game, filename: str):
         super().__init__(game)
-        self.position = self.game.screen_size * [0.5, 0.5]
+        self.position = self.game.screen_size * [0.45, 0.4]
         self.tc = TextComponent(self, 100)
         self.tc.set_color((255, 255, 255))
         self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
