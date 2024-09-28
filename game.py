@@ -14,6 +14,11 @@ from actor import Actor, state
 if TYPE_CHECKING:
     from sprite_component import SpriteComponent
 
+class Config:
+    def __init__(self) -> None:
+        self.camera_flag = False
+        self.camera_num = 0
+
 class Game:
     """this class is base of game"""
     def __init__(self):
@@ -24,14 +29,11 @@ class Game:
         self.mediapipe = None
         self.audio_system = AudioSystem()
         self.__screen = None
+        self.config = Config()
         self.screen_size = np.array([1300, 700]) # (1300, 700)
-        self.camera_check_mode: bool = False
-        self.camera_num = 0
         self.__actors: list[Actor] = []
         self.__pending_actors: list[Actor] = []
         self.__sprites: list[SpriteComponent] = []
-
-        self.point = 0
 
     def initialize(self) -> bool:
         """this method initial game"""
@@ -40,8 +42,8 @@ class Game:
             print(pygame.get_error())
             return False
         level_loader.load_game_properties(self, 'asset/GameProperty.json')
-        self.mediapipe = MediapipeInput(self.camera_num)
-        if self.camera_check_mode:
+        self.mediapipe = MediapipeInput(self.config.camera_num)
+        if self.config.camera_flag:
             camera_check()
             return False
         pygame.display.set_caption("tama|wake")
