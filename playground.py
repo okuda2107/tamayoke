@@ -15,17 +15,10 @@ if TYPE_CHECKING:
     from game import Game
 
 class PlayGround(Actor):
-    def __init__(self, game: Game, core = 1, pointer = [15, 16]):
+    def __init__(self, game: Game):
         super().__init__(game)
         self.cores: list[Core] = []
         self.pointers: list[Pointer] = []
-        rng = np.random.default_rng()
-        for _ in range(core):
-            core = Core(self.game)
-            core.position = self.game.screen_size * rng.uniform(0.3, 0.7, 2)
-            self.cores.append(core)
-        for p in pointer:
-            self.pointers.append(Pointer(self.game, p))
         self.enemy_gen = EnemyGenerator(self.game)
         self.timer = 0
         self.actor = Actor(self.game)
@@ -37,6 +30,20 @@ class PlayGround(Actor):
 
     def __del__(self):
         super().__del__()
+
+    def load_properties(self, obj: dict[str, Any]) -> None:
+        super().load_properties(obj)
+        core_num = obj.get('coreNum')
+        if core_num != None and type(core_num) is int:
+            rng = np.random.default_rng()
+            for _ in range(core_num):
+                core = Core(self.game)
+                core.position = self.game.screen_size * rng.uniform(0.3, 0.7, 2)
+                self.cores.append(core)
+        pointer_nums = obj.get('pointers')
+        if pointer_nums != None:
+            for p in pointer_nums:
+                self.pointers.append(Pointer(self.game, p))
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)

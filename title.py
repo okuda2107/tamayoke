@@ -42,4 +42,4 @@ class Title(Actor):
                     p.state = state.dead
                 self.logo.state = state.dead
                 self.button.state = state.dead
-                Count(self.game, 1, [15, 16])
+                Count(self.game, 'asset/level1.json')

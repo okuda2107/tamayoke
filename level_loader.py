@@ -7,6 +7,7 @@ from sprite_component import *
 
 from test import Test
 from title import Title
+from playground import PlayGround
 
 LEVEL_VERSION = 1
 
@@ -50,10 +51,10 @@ def load_game_properties(game: Game, file_name: str) -> bool:
             game.screen_size = np.array(screen_size_data)
         check_flag = data.get('cameraCheck')
         if check_flag != None:
-            game.camera_check_mode = check_flag
+            game.config.camera_flag = check_flag
         camera_num = data.get('cameraNumber')
         if camera_num != None:
-            game.camera_num = camera_num
+            game.config.camera_num = camera_num
 
 def load_actors(game: Game, arr: list[dict[str, Any]]) -> None:
     for obj in arr:

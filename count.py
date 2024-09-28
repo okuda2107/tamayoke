@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 from actor import Actor, state
+import level_loader
 from text_component import TextComponent
 from playground import PlayGround
 
@@ -8,7 +9,7 @@ if TYPE_CHECKING:
     from game import Game
 
 class Count(Actor):
-    def __init__(self, game: Game, core: int, pointer: list[int]):
+    def __init__(self, game: Game, filename: str):
         super().__init__(game)
         self.position = self.game.screen_size * [0.5, 0.5]
         self.tc = TextComponent(self, 100)
@@ -16,8 +17,7 @@ class Count(Actor):
         self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         self.tc.set_text('3')
         self.timer = 3
-        self.core = core
-        self.pointer = pointer
+        self.filename = filename
 
     def __del__(self):
         super().__del__()
@@ -27,7 +27,7 @@ class Count(Actor):
         self.timer -= delta_time
         if self.timer <= -1:
             self.state = state.dead
-            PlayGround(self.game, self.core, self.pointer)
+            level_loader.load_level(self.game, self.filename)
         elif self.timer <= 0:
             self.tc.set_text('Go!!!')
         elif self.timer <= 1:

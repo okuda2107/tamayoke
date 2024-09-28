@@ -1,0 +1,12 @@
+{
+    "version": 1,
+    "actors": [
+        {
+            "type": "PlayGround",
+            "properties": {
+                "coreNum": 1,
+                "pointers": [15, 16]
+            }
+        }
+    ]
+}
