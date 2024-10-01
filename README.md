@@ -1,23 +1,19 @@
-# tama|wake
-球を仕分けるゲームです
+# tama.yoke
+プレイヤーは自分の体にくっついた黄色い球を操作して，赤い球をよけながら，白い点にぶつけて消していく．<br>
+白い点は赤い球めがけて飛んでいき，白と赤が接触したらゲームオーバー．
+
+![{F5AABDCE-7FC9-4AD1-8EBB-A1021851B1D6}](https://github.com/user-attachments/assets/f7ddd5b9-bc68-43df-86c6-d4316ee2dc21)
+
+https://github.com/user-attachments/assets/45857d47-c42a-459f-a09b-193598cdabe5
+
 
 ## 遊び方
-実行ファイルを実行します．この時フォルダ構成を以下のようにしておく
+環境はwindows11を想定しています．カメラを用いるので，カメラデバイスがついていないと起動できません．
+1. リリースページからgame.zipをダウンロード．展開します．
+1. 圧縮してあった状態のディレクトリ構成のまま実行ファイルを実行します．具体的には以下のような構成．
 ```
-$ ls -R
-.:
-asset
+asset/
 main.exe
-
-./asset:
-Cosmic_Fantasy.mp3
-error.wav
-pop.wav
-result.json
-title.png
-GameProperty.json
-get.mp3
-level1.json
 ```
 
 ## 設定方法
