@@ -20,47 +20,19 @@ from box_component import BoxComponent
 from move_component import MoveComponent
 from circle_sprite_component import CircleSpriteComponent
 from text_component import TextComponent
+from result import Result
+from count import Count
+from anim_sprite_component import AnimSpriteComponent
 
 class Test(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
-        # self.a1 = Actor(self.game)
-        # self.a1.position = np.array([0, 0])
-        # csc = CircleSpriteComponent(self.a1)
-        # csc.color = (255, 83, 182)
-        # csc.radius = 200
-        # self.cc1 = CircleComponent(self.a1, Kind.core)
-        # sphere = Sphere()
-        # sphere.center = self.a1.position
-        # sphere.radius = csc.radius
-        # self.cc1.set_sphere(sphere)
-        # self.mc = MoveComponent(self.a1)
-        # self.mc.speed = 100
-
-        # a2 = Actor(self.game)
-        # a2.position = self.game.screen_size * 0.5
-        # csc = CircleSpriteComponent(a2)
-        # csc.color = (233, 231, 122)
-        # csc.radius = 100
-        # self.cc2 = CircleComponent(a2, Kind.core)
-        # sphere = Sphere()
-        # sphere.center = a2.position
-        # sphere.radius = csc.radius
-        # self.cc2.set_sphere(sphere)
-        # self.cc2 = BoxComponent(a2)
-        # box = AABB(np.array([200, 200]))
-        # self.cc2.set_object_box(box)
-
-        c = Core(self.game)
-        c.position = self.game.screen_size * 0.5
-        p = Pointer(self.game, 15)
-        EnemyGenerator(self.game)
-
-        a = Actor(self.game)
-        tc = TextComponent(a, 100)
-        tc.set_color((255, 255, 255))
-        tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
-        tc.set_text('test')
+        actor = Actor(self.game)
+        actor.position = self.game.screen_size * [0.5, 0.5]
+        anim = AnimSpriteComponent(actor, [300, 200])
+        anim.append_sprites('asset/start/start0.png')
+        anim.append_sprites('asset/start/start60.png')
+        anim.fps = len(anim.anim_sprites)
 
     def __del__(self):
         super().__del__()
@@ -85,13 +57,3 @@ class Test(Actor):
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
-        # if intersect(self.cc1.circle, self.cc2.get_world_box()):
-        #     print(self.cc1.circle.radius)
-        #     print(self.cc1.circle)
-        #     print('intersect!!!')
-        circles = self.game.physics.circles
-        if intersect(circles[Kind.core.value][0].circle, circles[Kind.pointer.value][0].circle):
-            print('intersect')
-        for v in circles[Kind.enemy.value]:
-            if intersect(circles[Kind.pointer.value][0].circle, v.circle):
-                print('intersect: enemy')

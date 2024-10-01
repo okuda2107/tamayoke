@@ -16,15 +16,18 @@ class BoxComponent(Component):
         super().__del__()
 
     def update(self, delta_time: float):
-        self.__world_box = copy.deepcopy(self.__object_box)
-        self.__world_box.min_pos *= self._owner.scale
-        self.__world_box.max_pos *= self._owner.scale
-        self.__world_box.min_pos += self._owner.position
-        self.__world_box.max_pos += self._owner.position
+        self.update_world_box()
 
     def set_object_box(self, model: AABB):
         self.__object_box = model
-        self.__world_box = model
+        self.__world_box = copy.deepcopy(model)
+        self.update_world_box()
+
+    def update_world_box(self):
+        self.__world_box.min_pos = self.__object_box.min_pos * self._owner.scale
+        self.__world_box.max_pos = self.__object_box.max_pos * self._owner.scale
+        self.__world_box.min_pos = self.__object_box.min_pos + self._owner.position
+        self.__world_box.max_pos = self.__object_box.max_pos + self._owner.position
 
     def get_world_box(self):
         return self.__world_box
