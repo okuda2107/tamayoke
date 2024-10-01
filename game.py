@@ -46,9 +46,9 @@ class Game:
         if self.config.camera_flag:
             camera_check()
             return False
-        pygame.display.set_caption("tama|wake")
+        pygame.display.set_caption("tama.yoke")
         # self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
-        self.__screen = pygame.display.set_mode(self.screen_size, pygame.RESIZABLE)
+        self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
         self.screen_size = np.array(self.__screen.get_size())
         if self.__screen is None:
             print(pygame.get_error())
