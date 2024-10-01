@@ -21,7 +21,6 @@ from move_component import MoveComponent
 from circle_sprite_component import CircleSpriteComponent
 from text_component import TextComponent
 from result import Result
-from count import Count
 from anim_sprite_component import AnimSpriteComponent
 
 class Test(Actor):
