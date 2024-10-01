@@ -19,14 +19,22 @@ class PlayGround(Actor):
         super().__init__(game)
         self.cores: list[Core] = []
         self.pointers: list[Pointer] = []
+        self.counter = Actor(self.game)
+        self.counter.position = self.game.screen_size * [0.45, 0.4]
+        self.counter_text = TextComponent(self.counter, 100)
+        self.counter_text.set_color((255, 255, 255))
+        self.counter_text.set_font('asset/DSEG14ClassicMini-Italic.ttf')
+        self.counter_text.set_text('3')
+        self.start_flag = False
+        self.timer = 3
+
         self.enemy_gen = EnemyGenerator(self.game)
-        self.timer = 0
+        self.enemy_gen.state = state.paused
         self.actor = Actor(self.game)
         self.actor.position = self.game.screen_size * [0, 0]
         self.tc = TextComponent(self.actor, 80)
         self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         self.tc.set_color((255, 255, 255))
-        self.tc.set_text('Time: ' + str(round(self.timer, 1)))
 
     def __del__(self):
         super().__del__()
@@ -39,6 +47,7 @@ class PlayGround(Actor):
             for _ in range(core_num):
                 core = Core(self.game)
                 core.position = self.game.screen_size * rng.uniform(0.3, 0.7, 2)
+                core.state = state.paused
                 self.cores.append(core)
         pointer_nums = obj.get('pointers')
         if pointer_nums != None:
@@ -47,6 +56,17 @@ class PlayGround(Actor):
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
+        if not self.start_flag:
+            self.timer -= delta_time
+            if self.timer <= -1:
+                self.start_game()
+            elif self.timer <= 0:
+                self.counter_text.set_text('Go!!!')
+            elif self.timer <= 1:
+                self.counter_text.set_text('1')
+            elif self.timer <= 2:
+                self.counter_text.set_text('2')
+            return
         self.enemy_gen.target_pos = random.choice(self.cores).position
         self.timer += delta_time
         self.tc.set_text('Time: ' + str(round(self.timer, 1)))
@@ -62,6 +82,15 @@ class PlayGround(Actor):
                     if intersect(c.circle, e.circle):
                         self.next_scene()
                         return
+
+    def start_game(self):
+        self.start_flag = True
+        self.timer = 0
+        self.counter.state = state.dead
+        self.enemy_gen.state = state.active
+        for core in self.cores:
+            core.state = state.active
+        self.tc.set_text('Time: ' + str(round(self.timer, 1)))
 
     def next_scene(self):
         self.state = state.dead

@@ -3,11 +3,11 @@ from typing import TYPE_CHECKING
 from actor import Actor, state
 from sprite_component import SpriteComponent
 from anim_sprite_component import AnimSpriteComponent
+import level_loader
 from collision import AABB, intersect
 from box_component import BoxComponent
 from circle_component import Kind
 from pointer import Pointer
-from count import Count
 
 if TYPE_CHECKING:
     from game import Game
@@ -51,7 +51,7 @@ class Title(Actor):
                         p.state = state.dead
                     self.logo.state = state.dead
                     self.button.state = state.dead
-                    Count(self.game, 'asset/level1.json')
+                    level_loader.load_level(self.game, 'asset/level1.json')
                     return
                 self.timer += delta_time
                 self.button.state = state.active

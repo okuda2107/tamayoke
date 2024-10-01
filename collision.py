@@ -51,7 +51,6 @@ def intersect(a: Union[AABB, Sphere], b: Union[AABB, Sphere]) -> bool:
 
     if isinstance(a, Sphere) and isinstance(b, AABB):
         distSq = b.min_dist_sq(a.center)
-        print(b.max_pos, b.min_pos)
         return distSq <= (a.radius ** 2)
 
     if isinstance(a, Sphere) and isinstance(b, Sphere):
