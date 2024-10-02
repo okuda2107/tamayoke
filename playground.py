@@ -14,6 +14,8 @@ from text_component import TextComponent
 if TYPE_CHECKING:
     from game import Game
 
+# nodeの下にnodeを持たせる感じで設計すると上手くいくかも
+
 class PlayGround(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
