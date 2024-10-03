@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('sand\\Lib\\site-packages\\mediapipe\\modules', 'mediapipe\\modules'),],
+    datas=[('tamayoke\\Lib\\site-packages\\mediapipe\\modules', 'mediapipe\\modules'),],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
