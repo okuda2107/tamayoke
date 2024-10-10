@@ -48,7 +48,7 @@ class Game:
             return False
         pygame.display.set_caption("tama.yoke")
         # self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
-        self.__screen = pygame.display.set_mode(self.screen_size, pygame.FULLSCREEN)
+        self.__screen = pygame.display.set_mode(self.screen_size, pygame.RESIZABLE)
         self.screen_size = np.array(self.__screen.get_size())
         if self.__screen is None:
             print(pygame.get_error())
@@ -122,6 +122,7 @@ class Game:
         if actor in self.__actors:
             self.__actors.remove(actor)
 
+    # draw_orderが大きいほうから描画されるので，手前から小さい順に並ぶ
     def add_sprite(self, sprite_comp: SpriteComponent) -> None:
         my_draw_order: int = sprite_comp.draw_order
         index = -1
