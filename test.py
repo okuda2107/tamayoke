@@ -28,10 +28,11 @@ class Test(Actor):
         super().__init__(game)
         actor = Actor(self.game)
         actor.position = self.game.screen_size * [0.5, 0.5]
-        anim = AnimSpriteComponent(actor, [300, 200])
-        anim.append_sprites('asset/start/start0.png')
-        anim.append_sprites('asset/start/start60.png')
-        anim.fps = len(anim.anim_sprites)
+        csc = CircleSpriteComponent(actor)
+        csc.radius = 5
+        csc.color = (233, 233, 0)
+        csc = CircleSpriteComponent(actor, draw_order=1000)
+
 
     def __del__(self):
         super().__del__()
