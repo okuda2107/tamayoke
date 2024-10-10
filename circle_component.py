@@ -11,6 +11,7 @@ class Kind(Enum):
     core = 0
     enemy =1
     pointer = 2
+    pointer_core = 3
 
 class CircleComponent(Component):
     def __init__(self, owner: Actor, kind: Kind):

@@ -9,9 +9,9 @@ from collision import Sphere
 if TYPE_CHECKING:
     from game import Game
 
-class Pointer(PointerBase):
+class PointerCore(PointerBase):
     def __init__(self, game: Game, index: int):
         super().__init__(game, index)
-        self.set_radius(self.game.screen_size[1] * 0.05)
-        self.set_color((233, 231, 122))
-        self.set_collision_type(Kind.pointer)
+        self.set_radius(self.game.screen_size[1] * 0.01)
+        self.set_color((240, 238, 129))
+        self.set_collision_type(Kind.pointer_core)

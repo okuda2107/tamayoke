@@ -10,7 +10,7 @@ class PhysWorld:
     def __init__(self, game: Game):
         self.game = game
         self.boxes: list[BoxComponent] = []
-        self.circles: list[list[CircleComponent]] = [[], [], []]
+        self.circles: list[list[CircleComponent]] = [[], [], [], []]
 
     def add_box(self, box: BoxComponent):
         self.boxes.append(box)

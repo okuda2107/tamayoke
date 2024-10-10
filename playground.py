@@ -8,6 +8,7 @@ from circle_component import Kind
 from counter import Counter
 from core import Core
 from pointer import Pointer
+from pointer_core import PointerCore
 from enemy_generator import EnemyGenerator
 from result import Result
 from text_component import TextComponent
@@ -20,6 +21,9 @@ if TYPE_CHECKING:
 class PlayGround(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
+        self.cores = []
+        self.pointers = []
+        self.pointer_cores = []
         self.counter = Counter(self.game)
         self.enemy_gen = EnemyGenerator(self.game)
         self.enemy_gen.state = state.paused
@@ -28,6 +32,7 @@ class PlayGround(Actor):
         self.tc = TextComponent(self.actor, 80)
         self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         self.tc.set_color((255, 255, 255))
+        self.timer = 0
 
     def __del__(self):
         super().__del__()
@@ -46,6 +51,7 @@ class PlayGround(Actor):
         if pointer_nums != None:
             for p in pointer_nums:
                 self.pointers.append(Pointer(self.game, p))
+                self.pointer_cores.append(PointerCore(self.game, p))
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
@@ -57,9 +63,10 @@ class PlayGround(Actor):
         circles = self.game.physics.circles
         for p in circles[Kind.pointer.value]:
             for c in circles[Kind.core.value]:
-                if intersect(p.circle, c.circle):
-                    self.next_scene()
-                    return
+                for pc in circles[Kind.pointer_core.value]:
+                    if intersect(c.circle, pc.circle):
+                        self.next_scene()
+                        return
                 for e in circles[Kind.enemy.value]:
                     if intersect(p.circle, e.circle):
                         e.get_owner().state = state.dead
