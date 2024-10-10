@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 from actor import Actor, state
+from text_component import TextComponent
 
 if TYPE_CHECKING:
     from game import Game
@@ -8,14 +9,11 @@ if TYPE_CHECKING:
 class Counter(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
-        self.cores: list[Core] = []
-        self.pointers: list[Pointer] = []
-        self.counter = Actor(self.game)
-        self.counter.position = self.game.screen_size * [0.45, 0.4]
-        self.counter_text = TextComponent(self.counter, 100)
-        self.counter_text.set_color((255, 255, 255))
-        self.counter_text.set_font('asset/DSEG14ClassicMini-Italic.ttf')
-        self.counter_text.set_text('3')
+        self.position = self.game.screen_size * [0.45, 0.4]
+        tc = TextComponent(self, 100)
+        tc.set_color((255, 255, 255))
+        tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
+        tc.set_text('3')
         self.start_flag = False
         self.timer = 3
 
