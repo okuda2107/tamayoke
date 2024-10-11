@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 
 class Pointer(PointerBase):
     def __init__(self, game: Game, index: int):
-        super().__init__(game, index)
-        self.set_radius(self.game.screen_size[1] * 0.05)
+        super().__init__(game, index, Kind.pointer, 90)
+        self.set_radius(self.game.screen_size[1] * 0.08)
         self.set_color((233, 231, 122))
-        self.set_collision_type(Kind.pointer)

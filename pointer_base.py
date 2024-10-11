@@ -10,12 +10,12 @@ if TYPE_CHECKING:
     from game import Game
 
 class PointerBase(Actor):
-    def __init__(self, game: Game, index: int):
+    def __init__(self, game: Game, index: int, kind, draw_order=100):
         super().__init__(game)
         self.index = index
         self.position = self.game.screen_size * [-1, -1]
-        self.csc = CircleSpriteComponent(self)
-        self.cc = CircleComponent(self, Kind.pointer)
+        self.csc = CircleSpriteComponent(self, draw_order)
+        self.cc = CircleComponent(self, kind)
         sphere = Sphere()
         sphere.center = self.position
         sphere.radius = self.csc.radius
@@ -27,9 +27,6 @@ class PointerBase(Actor):
 
     def set_color(self, color: tuple[int, int, int]):
         self.csc.color = color
-
-    def set_collision_type(self, kind):
-        self.cc.kind = kind
 
     def __del__(self):
         return super().__del__()

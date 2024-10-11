@@ -33,6 +33,7 @@ class PlayGround(Actor):
         self.tc.set_font('asset/DSEG14ClassicMini-Italic.ttf')
         self.tc.set_color((255, 255, 255))
         self.timer = 0
+        self.start_flag = False
 
     def __del__(self):
         super().__del__()
@@ -55,7 +56,9 @@ class PlayGround(Actor):
 
     def update_actor(self, delta_time: float) -> None:
         super().update_actor(delta_time)
-        if self.counter.timer >= -1:
+        if not self.start_flag:
+            if self.counter.start_flag:
+                self.start_game()
             return
         self.enemy_gen.target_pos = random.choice(self.cores).position
         self.timer += delta_time
@@ -89,6 +92,8 @@ class PlayGround(Actor):
         for c in self.cores:
             c.state = state.dead
         for p in self.pointers:
+            p.state = state.dead
+        for p in self.pointer_cores:
             p.state = state.dead
         self.enemy_gen.state = state.dead
         for e in self.enemy_gen.enemies:
