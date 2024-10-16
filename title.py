@@ -19,12 +19,12 @@ class Title(Actor):
         self.pointer = [Pointer(self.game, 15), Pointer(self.game, 16)]
 
         self.logo = Actor(self.game)
-        self.logo.position = self.game.screen_size * [0.5, 0.4]
+        self.logo.position = self.game.screen_size * [0.5, 0.3]
         sc = SpriteComponent(self.logo)
         sc.set_image('asset/title.png', (200, 150))
 
         self.button = Actor(self.game)
-        self.button.position = self.game.screen_size * [0.5, 0.6]
+        self.button.position = self.game.screen_size * [0.5, 0.7]
         self.anim = AnimSpriteComponent(self.button)
         filenames = []
         for i in range(69):
