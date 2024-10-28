@@ -35,6 +35,13 @@ class PlayGround(Actor):
         self.timer = 0
         self.start_flag = False
 
+        self.POP = 'asset/pop.wav'
+        self.ERROR = 'asset/error.wav'
+
+        self.game.audio_system.bgm('asset/get.mp3')
+        self.game.audio_system.set_sound(self.POP)
+        self.game.audio_system.set_sound(self.ERROR)
+
     def __del__(self):
         super().__del__()
 
@@ -72,6 +79,7 @@ class PlayGround(Actor):
                         return
                 for e in circles[Kind.enemy.value]:
                     if intersect(p.circle, e.circle):
+                        self.game.audio_system.play(self.POP)
                         e.get_owner().state = state.dead
                     if intersect(c.circle, e.circle):
                         self.next_scene()
@@ -87,6 +95,7 @@ class PlayGround(Actor):
         self.tc.set_text('Time: ' + str(round(self.timer, 1)))
 
     def next_scene(self):
+        self.game.audio_system.play(self.ERROR)
         self.state = state.dead
         self.actor.state = state.dead
         for c in self.cores:

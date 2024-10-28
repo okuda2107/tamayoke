@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 from actor import Actor, state
 from sprite_component import SpriteComponent
+from text_component import TextComponent
 from anim_sprite_component import AnimSpriteComponent
 import level_loader
 from collision import AABB, intersect
@@ -21,7 +22,7 @@ class Title(Actor):
         self.logo = Actor(self.game)
         self.logo.position = self.game.screen_size * [0.5, 0.3]
         sc = SpriteComponent(self.logo)
-        sc.set_image('asset/title.png', (200, 150))
+        sc.set_image('asset/title.png', self.game.screen_size * [0.6, 0.3])
 
         self.button = Actor(self.game)
         self.button.position = self.game.screen_size * [0.5, 0.7]
@@ -29,12 +30,14 @@ class Title(Actor):
         filenames = []
         for i in range(69):
             filenames.append('asset/start/start' + str(i) + '.png')
-        self.anim.set_anim_sprites(filenames, [200, 150])
+        self.anim.set_anim_sprites(filenames, self.game.screen_size * [0.35, 0.3])
         self.anim.fps = len(self.anim.anim_sprites) / 2
         self.timer = 0.0
         bc = BoxComponent(self.button)
         box = AABB(self.anim.image_size)
         bc.set_object_box(box)
+
+        self.game.audio_system.bgm('asset/Cosmic_Fantasy.mp3')
 
     def __del__(self):
         super().__del__()
