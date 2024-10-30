@@ -38,7 +38,7 @@ class PlayGround(Actor):
         self.POP = 'asset/pop.wav'
         self.ERROR = 'asset/error.wav'
 
-        self.game.audio_system.bgm('asset/get.mp3')
+        self.game.audio_system.bgm('asset/game.mp3')
         self.game.audio_system.set_sound(self.POP)
         self.game.audio_system.set_sound(self.ERROR)
 

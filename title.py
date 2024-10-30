@@ -37,7 +37,7 @@ class Title(Actor):
         box = AABB(self.anim.image_size)
         bc.set_object_box(box)
 
-        self.game.audio_system.bgm('asset/Cosmic_Fantasy.mp3')
+        self.game.audio_system.bgm('asset/title.mp3')
 
     def __del__(self):
         super().__del__()
