@@ -14,10 +14,13 @@ class MoveAndTurnComponent(MoveComponent):
         self.box = box
 
     def update(self, delta_time: float):
-        pre_position = self._owner.position
         super().update(delta_time)
-        if self.box.contains(pre_position) and not self.box.contains(self._owner.position):
+        if not self.box.contains(self._owner.position):
+            flag = False
             if self._owner.position[0] <= self.box.min_pos[0] or self._owner.position[0] >= self.box.max_pos[0]:
                 self.forward[0] *= -1
+                flag = True
             if self._owner.position[1] <= self.box.min_pos[1] or self._owner.position[1] >= self.box.max_pos[1]:
                 self.forward[1] *= -1
+                flag = True
+

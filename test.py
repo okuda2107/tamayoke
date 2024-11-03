@@ -26,12 +26,9 @@ from anim_sprite_component import AnimSpriteComponent
 class Test(Actor):
     def __init__(self, game: Game):
         super().__init__(game)
-        actor = Actor(self.game)
-        actor.position = self.game.screen_size * [0.5, 0.5]
-        csc = CircleSpriteComponent(actor)
-        csc.radius = 5
-        csc.color = (233, 233, 0)
-        csc = CircleSpriteComponent(actor, draw_order=1000)
+        core = Core(self.game)
+        core.mc.set_forward(self.game.screen_size * [0.5, -0.5])
+
 
 
     def __del__(self):
